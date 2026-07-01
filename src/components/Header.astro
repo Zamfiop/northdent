@@ -3,7 +3,7 @@ import { mainNav } from "@/data/navigation";
 import { site } from "@/data/site";
 import Logo from "@/components/Logo.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
-import MobileNav from "@/components/MobileNav.astro";
+import MobileNavToggle from "@/components/MobileNavToggle.astro";
 
 const currentPath = Astro.url.pathname;
 function isActive(href: string): boolean {
@@ -51,7 +51,7 @@ function isActive(href: string): boolean {
       <div class="hidden sm:block">
         <WhatsAppButton label="WhatsApp" size="md" />
       </div>
-      <MobileNav />
+      <MobileNavToggle />
     </div>
   </div>
 </header>

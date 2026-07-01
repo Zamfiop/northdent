@@ -3,22 +3,12 @@ import { mainNav, secondaryNav } from "@/data/navigation";
 import { site } from "@/data/site";
 import Logo from "@/components/Logo.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
----
 
-<div class="lg:hidden">
-  <button
-    type="button"
-    id="mobile-nav-toggle"
-    aria-label="Deschide meniul"
-    aria-expanded="false"
-    aria-controls="mobile-nav-panel"
-    class="inline-flex items-center justify-center rounded-md p-2 text-secondary-800 hover:bg-secondary-50"
-  >
-    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
-    </svg>
-  </button>
-</div>
+/**
+ * Panou meniu mobil — randat în BaseLayout (nu în header), deoarece header-ul
+ * folosește backdrop-blur care creează un containing block și strică position:fixed.
+ */
+---
 
 <div
   id="mobile-nav-panel"
@@ -28,9 +18,9 @@ import WhatsAppButton from "@/components/WhatsAppButton.astro";
   aria-modal="true"
   aria-label="Meniu de navigație"
 >
-  <div id="mobile-nav-overlay" class="absolute inset-0 bg-secondary-900/40"></div>
-  <div class="absolute right-0 top-0 flex h-full w-4/5 max-w-sm flex-col bg-white shadow-xl">
-    <div class="flex h-16 items-center justify-between border-b border-secondary-100 px-4">
+  <div id="mobile-nav-overlay" class="absolute inset-0 z-0 bg-secondary-900/50"></div>
+  <div class="absolute right-0 top-0 z-10 flex h-full w-[min(100%,20rem)] flex-col bg-white shadow-xl">
+    <div class="flex h-16 shrink-0 items-center justify-between border-b border-secondary-100 px-4">
       <Logo />
       <button
         type="button"
@@ -43,7 +33,7 @@ import WhatsAppButton from "@/components/WhatsAppButton.astro";
         </svg>
       </button>
     </div>
-    <nav class="flex-1 overflow-y-auto px-4 py-4" aria-label="Navigație mobilă">
+    <nav class="min-h-0 flex-1 overflow-y-auto px-4 py-4" aria-label="Navigație mobilă">
       <ul class="space-y-1">
         {
           [...mainNav, ...secondaryNav].map((item) => (
@@ -59,7 +49,7 @@ import WhatsAppButton from "@/components/WhatsAppButton.astro";
         }
       </ul>
     </nav>
-    <div class="border-t border-secondary-100 p-4">
+    <div class="shrink-0 border-t border-secondary-100 p-4">
       <WhatsAppButton fullWidth size="lg" />
       <a
         href={`tel:${site.phoneHref}`}
@@ -77,16 +67,19 @@ import WhatsAppButton from "@/components/WhatsAppButton.astro";
   const panel = document.getElementById("mobile-nav-panel");
   const closeBtn = document.getElementById("mobile-nav-close");
   const overlay = document.getElementById("mobile-nav-overlay");
+  const stickyWhatsApp = document.querySelector<HTMLElement>("[data-sticky-whatsapp]");
 
   function open() {
     panel?.removeAttribute("hidden");
     toggle?.setAttribute("aria-expanded", "true");
     document.body.style.overflow = "hidden";
+    if (stickyWhatsApp) stickyWhatsApp.hidden = true;
   }
   function close() {
     panel?.setAttribute("hidden", "");
     toggle?.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
+    if (stickyWhatsApp) stickyWhatsApp.hidden = false;
   }
 
   toggle?.addEventListener("click", open);
@@ -95,7 +88,6 @@ import WhatsAppButton from "@/components/WhatsAppButton.astro";
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !panel?.hasAttribute("hidden")) close();
   });
-  // Închide la navigare între linkuri
   panel?.querySelectorAll("a[href]").forEach((a) => {
     a.addEventListener("click", close);
   });

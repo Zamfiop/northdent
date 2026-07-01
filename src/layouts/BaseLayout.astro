@@ -2,6 +2,7 @@
 import "@/styles/global.css";
 import SeoHead from "@/components/SeoHead.astro";
 import Header from "@/components/Header.astro";
+import MobileNavPanel from "@/components/MobileNavPanel.astro";
 import Footer from "@/components/Footer.astro";
 import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
 import ConsentManager from "@/components/ConsentManager.astro";
@@ -52,6 +53,7 @@ const globalSchema = includeBusinessSchema
       Sari la conținut
     </a>
     <Header />
+    <MobileNavPanel />
     <main id="main" class="flex-1">
       <slot />
     </main>
