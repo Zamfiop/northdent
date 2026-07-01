@@ -1,0 +1,296 @@
+---
+import OfferLayout from "@/layouts/OfferLayout.astro";
+import Container from "@/components/Container.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import CountdownTimer from "@/components/CountdownTimer.astro";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider.astro";
+import { offerSlugs, getOffer } from "@/data/offers";
+import { reviews } from "@/data/reviews";
+import { site } from "@/data/site";
+
+export function getStaticPaths() {
+  return offerSlugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const offer = getOffer(slug!)!;
+
+const savings = offer.priceOld - offer.priceNow;
+const percentOff = Math.round((savings / offer.priceOld) * 100);
+
+// Hero: before/after (dacă ready) > imagine simplă (dacă ready !== false) > poza medicului.
+const beforeAfter =
+  offer.hero?.type === "beforeAfter" && offer.hero.ready ? offer.hero : null;
+const heroImage =
+  offer.hero?.type === "image" && offer.hero.ready !== false ? offer.hero : null;
+
+// Recenzii reale, în ordinea din ofertă (doar cele care există).
+const offerReviews = offer.reviewAuthors
+  .map((name) => reviews.find((r) => r.authorName === name))
+  .filter((r): r is (typeof reviews)[number] => Boolean(r));
+
+const path = `/oferta/${offer.slug}/`;
+---
+
+<OfferLayout title={offer.title} description={offer.description} path={path}>
+  {/* Bară sticky cu countdown */}
+  <div class="sticky top-0 z-40 bg-primary-700 text-white shadow-md">
+    <Container class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 py-2 text-center sm:justify-between">
+      <p class="text-sm font-semibold">
+        <span class="rounded-full bg-white/15 px-2 py-0.5 text-xs font-bold uppercase tracking-wide">-{percentOff}%</span>
+        <span class="ml-2">Oferta se încheie în:</span>
+      </p>
+      <CountdownTimer deadline={offer.deadline} variant="bar" expiredText="Ofertă încheiată" />
+    </Container>
+  </div>
+
+  {/* Hero */}
+  <section class="relative overflow-hidden bg-gradient-to-b from-primary-50 via-white to-white">
+    <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary-100/60 blur-3xl" aria-hidden="true"></div>
+    <Container class="relative grid items-center gap-10 py-10 sm:py-14 md:grid-cols-2 lg:py-16">
+      <div class="mx-auto max-w-xl text-center md:mx-0 md:text-left">
+        <p class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-medium text-primary-700 ring-1 ring-inset ring-primary-100">
+          <span class="h-2 w-2 rounded-full bg-primary-500"></span>
+          {offer.eyebrow}
+        </p>
+        <p class="mt-4 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-amber-800">
+          {offer.badge}
+        </p>
+        <h1 class="mt-3 text-3xl font-extrabold leading-tight text-ink sm:text-4xl lg:text-[2.75rem]">
+          {offer.heading}
+        </h1>
+        <p class="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+          {offer.subheading}
+        </p>
+
+        {/* Preț */}
+        <div class="mt-6 flex flex-wrap items-end justify-center gap-x-4 gap-y-1 md:justify-start">
+          <span class="text-lg font-medium text-ink-soft line-through decoration-2">
+            {offer.priceOld} {offer.currency}
+          </span>
+          <span class="text-4xl font-extrabold text-primary-700 sm:text-5xl">
+            {offer.priceNow} {offer.currency}
+          </span>
+          <span class="rounded-full bg-primary-600 px-3 py-1 text-sm font-bold text-white">
+            Economisești {savings} {offer.currency}
+          </span>
+        </div>
+        {offer.priceNote && (
+          <p class="mt-1 text-sm text-ink-soft md:text-left">{offer.priceNote}</p>
+        )}
+
+        <div class="mx-auto mt-7 flex max-w-sm flex-col gap-3 md:mx-0">
+          <WhatsAppButton size="lg" label="Programează-te pe WhatsApp" message={offer.whatsappMessage} class="w-full whitespace-nowrap" />
+          <a
+            href={`tel:${site.phoneHref}`}
+            data-track="phone_click"
+            class="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-white px-7 py-3.5 text-base font-semibold leading-snug text-secondary-800 ring-1 ring-inset ring-secondary-200 hover:bg-secondary-50"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" />
+            </svg>
+            Sună acum: {site.phoneDisplay}
+          </a>
+        </div>
+
+        <ul class="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink-soft md:justify-start">
+          {
+            offer.trustPoints.map((point) => (
+              <li class="flex items-center gap-2">
+                <svg class="h-5 w-5 text-primary-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.1 3.1 6.8-6.8a1 1 0 0 1 1.4 0Z" clip-rule="evenodd" />
+                </svg>
+                {point}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {
+        beforeAfter ? (
+          <BeforeAfterSlider
+            before={beforeAfter.before}
+            beforeAlt={beforeAfter.beforeAlt}
+            after={beforeAfter.after}
+            afterAlt={beforeAfter.afterAlt}
+            note={beforeAfter.note}
+          />
+        ) : heroImage ? (
+          <figure class="mx-auto w-full max-w-md">
+            <div class="aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-secondary-100">
+              <img
+                src={heroImage.src}
+                alt={heroImage.alt}
+                width="640"
+                height="800"
+                fetchpriority="high"
+                decoding="async"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            {heroImage.note && (
+              <figcaption class="mt-2 text-center text-xs text-ink-soft">{heroImage.note}</figcaption>
+            )}
+          </figure>
+        ) : (
+          <div class="relative mx-auto w-full max-w-md">
+            <div class="aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-secondary-100">
+              <img
+                src={site.doctor.photo}
+                alt={site.doctor.photoAlt}
+                width="640"
+                height="800"
+                fetchpriority="high"
+                decoding="async"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div class="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/95 p-4 shadow-lg ring-1 ring-secondary-100 backdrop-blur">
+              <p class="text-sm font-bold text-ink">{site.doctor.name}</p>
+              <p class="text-xs text-ink-soft">{site.doctor.title}</p>
+            </div>
+          </div>
+        )
+      }
+    </Container>
+  </section>
+
+  {/* Urgență + countdown mare */}
+  <section class="bg-secondary-900 py-10 text-white sm:py-12">
+    <Container class="flex flex-col items-center gap-5 text-center">
+      <h2 class="text-xl font-bold sm:text-2xl">Oferta este valabilă un timp limitat</h2>
+      <div class="rounded-2xl bg-white/5 p-4 ring-1 ring-inset ring-white/10">
+        <CountdownTimer deadline={offer.deadline} variant="block" expiredText="Oferta s-a încheiat — scrie-ne pentru disponibilitate" />
+      </div>
+      <p class="max-w-xl text-sm text-white/80">
+        Locurile din perioada ofertei sunt limitate. Rezervă-ți intervalul acum pe WhatsApp.
+      </p>
+      <WhatsAppButton size="lg" label="Prinde oferta pe WhatsApp" message={offer.whatsappMessage} />
+    </Container>
+  </section>
+
+  {/* Ce include */}
+  <section class="py-12 sm:py-16">
+    <Container>
+      <h2 class="text-center text-2xl font-extrabold text-ink sm:text-3xl">Ce include pachetul</h2>
+      <div class="mt-8 grid gap-6 sm:grid-cols-3">
+        {
+          offer.includes.map((item, i) => (
+            <div class="rounded-2xl border border-secondary-100 bg-surface-muted p-6">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 text-sm font-bold text-white">
+                {i + 1}
+              </span>
+              <h3 class="mt-4 text-lg font-bold text-ink">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-soft">{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  {/* Recenzii */}
+  {
+    offerReviews.length > 0 && (
+      <section class="bg-surface-muted py-12 sm:py-16">
+        <Container>
+          <h2 class="text-center text-2xl font-extrabold text-ink sm:text-3xl">Ce spun pacienții</h2>
+          <div class="mt-8 grid gap-6 md:grid-cols-3">
+            {offerReviews.map((review) => (
+              <figure class="flex h-full flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-secondary-100">
+                <div class="flex gap-0.5 text-amber-400" aria-label={`${review.rating} din 5 stele`}>
+                  {Array.from({ length: review.rating }).map(() => (
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M10 15.27 16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote class="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">
+                  „{review.text}"
+                </blockquote>
+                <figcaption class="mt-4 flex items-center gap-3">
+                  <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-primary-700">
+                    {review.initials}
+                  </span>
+                  <span class="text-sm font-semibold text-ink">{review.authorName}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </Container>
+      </section>
+    )
+  }
+
+  {/* Locație */}
+  <section class="py-12 sm:py-16">
+    <Container class="text-center">
+      <h2 class="text-2xl font-extrabold text-ink sm:text-3xl">Unde ne găsești</h2>
+      <p class="mt-3 text-ink-soft">
+        {site.address.streetAddress}, {site.address.addressLocality} — {site.address.areaLabel}
+      </p>
+      <a
+        href={site.mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-track="maps_click"
+        class="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-secondary-800 ring-1 ring-inset ring-secondary-200 hover:bg-secondary-50"
+      >
+        Vezi locația pe hartă
+      </a>
+    </Container>
+  </section>
+
+  {/* FAQ */}
+  {
+    offer.faqs.length > 0 && (
+      <section class="bg-surface-muted py-12 sm:py-16">
+        <Container size="narrow">
+          <h2 class="text-center text-2xl font-extrabold text-ink sm:text-3xl">Întrebări frecvente</h2>
+          <div class="mt-8 space-y-3">
+            {offer.faqs.map((faq) => (
+              <details class="group rounded-2xl border border-secondary-100 bg-white p-5">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold text-ink marker:content-none">
+                  {faq.question}
+                  <svg class="h-5 w-5 shrink-0 text-primary-600 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4Z" clip-rule="evenodd" />
+                  </svg>
+                </summary>
+                <p class="mt-3 text-sm leading-relaxed text-ink-soft">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </Container>
+      </section>
+    )
+  }
+
+  {/* CTA final */}
+  <section class="bg-primary-700 py-14 text-white sm:py-16">
+    <Container class="flex flex-col items-center gap-5 text-center">
+      <h2 class="text-2xl font-extrabold sm:text-3xl">
+        {offer.priceNow} {offer.currency} în loc de {offer.priceOld} {offer.currency}
+      </h2>
+      <p class="max-w-xl text-white/90">
+        Scrie-ne pe WhatsApp și îți propunem cel mai apropiat interval disponibil.
+      </p>
+      <div class="flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+        <WhatsAppButton size="lg" variant="secondary" label="Programează-te pe WhatsApp" message={offer.whatsappMessage} class="w-full whitespace-nowrap sm:w-auto" />
+        <a
+          href={`tel:${site.phoneHref}`}
+          data-track="phone_click"
+          class="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full px-7 py-3.5 text-base font-semibold text-white ring-1 ring-inset ring-white/40 hover:bg-white/10 sm:w-auto"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" />
+          </svg>
+          Sună: {site.phoneDisplay}
+        </a>
+      </div>
+      <p class="mt-4 max-w-2xl text-xs leading-relaxed text-white/70">
+        {offer.finePrint}
+      </p>
+    </Container>
+  </section>
+</OfferLayout>

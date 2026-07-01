@@ -12,7 +12,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Blog is prepared technically but not promoted in the primary nav yet.
-      filter: (page) => !page.includes("/blog/"),
+      // /oferta/ are landing/funnel pages for paid ads: noindex + not in sitemap.
+      filter: (page) => !page.includes("/blog/") && !page.includes("/oferta/"),
     }),
   ],
   vite: {

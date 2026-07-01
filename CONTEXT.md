@@ -181,6 +181,12 @@ Alias import: `@/` => `src/` (vezi `tsconfig.json`).
   mențiune CUANTIC DENT SRL, copyright.
 - **Blog**: pregătit tehnic (`/blog/` „în curând" + `/blog/[slug]`), **NEpromovat** în
   nav principal, exclus din sitemap. Articole în `src/data/blog.ts` (gol acum).
+- **Oferte / funnel** (`/oferta/<slug>/`): landing pages pentru reclame plătite, generate
+  din `src/data/offers.ts` (rută `src/pages/oferta/[slug].astro` + `OfferLayout`). Sunt
+  `noindex`, excluse din sitemap și nelegate în nav — accesibile doar prin link direct.
+  Hero configurabil per ofertă: poza medicului / imagine simplă / slider before/after
+  (`BeforeAfterSlider`, cu convenția `ready`). Timer către un deadline real de campanie
+  (`CountdownTimer`). Ghid complet: `docs/oferte.md`.
 
 ---
 

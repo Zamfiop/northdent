@@ -22,3 +22,16 @@ Sursa de adevăr pentru lista afișată: `src/data/gallery.ts`.
 | `interpretare-radiografie-dentist-valcea.webp` | Galerie |
 
 La adăugarea unei imagini noi: pune fișierul în `galerie/`, apoi adaugă intrarea în `src/data/gallery.ts` cu `alt` descriptiv și local (Râmnicu Vâlcea).
+
+## Oferte / funnel (`oferte/`)
+Imagini pentru paginile de campanie (`src/data/offers.ts`). Before/after la albire:
+
+| Fișier | Folosit în |
+|--------|------------|
+| `albire-inainte.webp` | `/oferta/albire-dentara/` — slider „Înainte" |
+| `albire-dupa.webp` | `/oferta/albire-dentara/` — slider „După" |
+
+IMPORTANT: folosește DOAR poze reale ale unui pacient, cu acordul lui scris pentru
+publicitate (GDPR). Recomandat: același cadru/unghi/lumină pentru ambele. După ce
+adaugi fișierele, setează `hero.ready: true` la oferta respectivă în `src/data/offers.ts`
+ca slider-ul să înlocuiască poza medicului.

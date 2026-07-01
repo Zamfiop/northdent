@@ -1,0 +1,116 @@
+---
+// Countdown către un deadline REAL de campanie (dată din src/data/offers.ts).
+// După expirare, ascunde timer-ul și afișează un mesaj neutru; CTA rămâne activ.
+interface Props {
+  /** Deadline ISO cu fus orar, ex. "2026-07-10T23:59:00+03:00" */
+  deadline: string;
+  variant?: "bar" | "block";
+  expiredText?: string;
+  class?: string;
+}
+const {
+  deadline,
+  variant = "block",
+  expiredText = "Oferta s-a încheiat",
+  class: className = "",
+} = Astro.props;
+
+const units = [
+  { key: "days", label: "zile" },
+  { key: "hours", label: "ore" },
+  { key: "minutes", label: "min" },
+  { key: "seconds", label: "sec" },
+];
+
+const isBar = variant === "bar";
+const segment = isBar
+  ? "flex flex-col items-center leading-none"
+  : "flex flex-col items-center rounded-xl bg-white/95 px-3 py-2 shadow-sm ring-1 ring-inset ring-primary-100 sm:px-4 sm:py-3 min-w-[3.75rem] sm:min-w-[4.5rem]";
+const number = isBar
+  ? "text-base font-extrabold tabular-nums text-white"
+  : "text-2xl font-extrabold tabular-nums text-primary-700 sm:text-3xl";
+const unitLabel = isBar
+  ? "text-[10px] font-medium uppercase tracking-wide text-white/80"
+  : "mt-1 text-[11px] font-medium uppercase tracking-wide text-ink-soft";
+const sep = isBar ? "text-white/60" : "text-primary-300";
+const liveWrap = isBar
+  ? "flex items-center gap-1.5"
+  : "flex items-center gap-2 sm:gap-3";
+---
+
+<div
+  class={`countdown ${className}`}
+  data-countdown
+  data-deadline={deadline}
+  role="timer"
+  aria-label="Timp rămas din ofertă"
+>
+  <div class={`countdown-live ${liveWrap}`}>
+    {
+      units.map((u, i) => (
+        <>
+          <div class={segment}>
+            <span class={number} data-unit={u.key}>--</span>
+            <span class={unitLabel}>{u.label}</span>
+          </div>
+          {i < units.length - 1 && !isBar && (
+            <span class={`text-2xl font-bold sm:text-3xl ${sep}`} aria-hidden="true">:</span>
+          )}
+          {i < units.length - 1 && isBar && (
+            <span class={`text-sm font-bold ${sep}`} aria-hidden="true">:</span>
+          )}
+        </>
+      ))
+    }
+  </div>
+  <p class={`countdown-expired hidden ${isBar ? "text-sm font-semibold text-white" : "text-base font-semibold text-ink"}`}>
+    {expiredText}
+  </p>
+</div>
+
+<script>
+  function pad(value: number): string {
+    return value < 10 ? "0" + value : String(value);
+  }
+
+  function initCountdown(root: HTMLElement): void {
+    const raw = root.dataset.deadline;
+    if (!raw) return;
+    const deadline = new Date(raw).getTime();
+    if (Number.isNaN(deadline)) return;
+
+    const live = root.querySelector<HTMLElement>(".countdown-live");
+    const expired = root.querySelector<HTMLElement>(".countdown-expired");
+    const cells = root.querySelectorAll<HTMLElement>("[data-unit]");
+
+    let timerId = 0;
+
+    function tick(): void {
+      const diff = deadline - Date.now();
+      if (diff <= 0) {
+        live?.classList.add("hidden");
+        expired?.classList.remove("hidden");
+        root.dataset.state = "expired";
+        if (timerId) window.clearInterval(timerId);
+        return;
+      }
+      const values: Record<string, string> = {
+        days: pad(Math.floor(diff / 86400000)),
+        hours: pad(Math.floor((diff % 86400000) / 3600000)),
+        minutes: pad(Math.floor((diff % 3600000) / 60000)),
+        seconds: pad(Math.floor((diff % 60000) / 1000)),
+      };
+      cells.forEach((cell) => {
+        const unit = cell.dataset.unit;
+        if (unit && values[unit] !== undefined) cell.textContent = values[unit];
+      });
+    }
+
+    tick();
+    timerId = window.setInterval(tick, 1000);
+  }
+
+  document
+    .querySelectorAll<HTMLElement>("[data-countdown]")
+    .forEach(initCountdown);
+</script>

@@ -1,0 +1,64 @@
+---
+// Layout dedicat paginilor de tip funnel (landing pentru reclame).
+// Diferă intenționat de BaseLayout: FĂRĂ header/navigație și fără footer complet,
+// ca vizitatorul să rămână concentrat pe ofertă și pe CTA.
+// Mereu noindex; paginile sunt excluse și din sitemap (astro.config.mjs).
+import "@/styles/global.css";
+import SeoHead from "@/components/SeoHead.astro";
+import ConsentManager from "@/components/ConsentManager.astro";
+import Logo from "@/components/Logo.astro";
+import { site } from "@/data/site";
+import { legalNav } from "@/data/navigation";
+import type { SeoInput } from "@/lib/seo";
+
+interface Props extends Omit<SeoInput, "noindex"> {}
+const seo = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <meta name="theme-color" content="#069478" />
+    <SeoHead {...seo} noindex={true} />
+  </head>
+  <body class="flex min-h-screen flex-col bg-white">
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="border-t border-secondary-100 bg-surface-muted">
+      <div class="mx-auto flex max-w-4xl flex-col items-center gap-4 px-4 py-8 text-center sm:px-6">
+        <Logo />
+        <address class="not-italic text-sm text-ink-soft">
+          {site.address.streetAddress}, {site.address.addressLocality}
+        </address>
+        <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-ink-soft">
+          {
+            legalNav.map((item) => (
+              <a href={item.href} class="hover:text-primary-700">
+                {item.label}
+              </a>
+            ))
+          }
+          <button
+            type="button"
+            id="open-cookie-settings"
+            class="hover:text-primary-700"
+          >
+            Setări cookies
+          </button>
+        </div>
+        <p class="text-xs text-ink-soft">
+          © {year} {site.brand} — {site.legalName}
+        </p>
+      </div>
+    </footer>
+
+    <ConsentManager />
+  </body>
+</html>
