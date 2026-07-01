@@ -1,0 +1,93 @@
+---
+interface Props {
+  priceNow: number;
+  priceOld: number;
+  currency: string;
+  percentOff: number;
+  savings: number;
+  priceNote?: string;
+  variant?: "light" | "dark";
+  class?: string;
+}
+const {
+  priceNow,
+  priceOld,
+  currency,
+  percentOff,
+  savings,
+  priceNote,
+  variant = "light",
+  class: className = "",
+} = Astro.props;
+
+const isDark = variant === "dark";
+const align = isDark ? "text-center" : "text-center md:text-left";
+const rowJustify = isDark ? "justify-center" : "justify-center md:justify-start";
+---
+
+<div
+  class:list={[
+    "rounded-2xl px-5 py-4 sm:px-6 sm:py-5",
+    align,
+    isDark
+      ? "bg-white/10 ring-1 ring-inset ring-white/20"
+      : "bg-white shadow-md shadow-primary-900/5 ring-1 ring-secondary-100",
+    className,
+  ]}
+>
+  <div class:list={["flex flex-wrap items-baseline gap-2", rowJustify]}>
+    <p
+      class:list={[
+        "text-3xl font-extrabold leading-none tracking-tight tabular-nums sm:text-4xl",
+        isDark ? "text-white" : "text-primary-700",
+      ]}
+    >
+      {priceNow}
+      <span class="ml-1 text-lg font-bold sm:text-xl">{currency}</span>
+    </p>
+    <span
+      class:list={[
+        "rounded-full px-2.5 py-1 text-xs font-bold tabular-nums",
+        isDark ? "bg-white text-primary-800" : "bg-primary-600 text-white",
+      ]}
+    >
+      -{percentOff}%
+    </span>
+  </div>
+
+  {priceNote && (
+    <p class:list={["mt-1 text-sm", isDark ? "text-white/70" : "text-ink-soft"]}>
+      {priceNote}
+    </p>
+  )}
+
+  <div
+    class:list={[
+      "mt-2.5 space-y-1 text-sm tabular-nums sm:flex sm:flex-wrap sm:items-baseline sm:gap-x-2 sm:gap-y-0.5 sm:space-y-0",
+      rowJustify,
+      isDark ? "text-white/80" : "text-ink-soft",
+    ]}
+  >
+    <span>
+      Preț standard:
+      <span class="ml-1 font-medium line-through decoration-2">{priceOld} {currency}</span>
+    </span>
+    <span
+      class:list={[
+        "hidden sm:inline",
+        isDark ? "text-white/40" : "text-secondary-200",
+      ]}
+      aria-hidden="true"
+    >
+      ·
+    </span>
+    <span
+      class:list={[
+        "block font-semibold sm:inline",
+        isDark ? "text-white" : "text-primary-700",
+      ]}
+    >
+      Economisești {savings} {currency}
+    </span>
+  </div>
+</div>

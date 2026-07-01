@@ -4,6 +4,7 @@ import Container from "@/components/Container.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
 import CountdownTimer from "@/components/CountdownTimer.astro";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider.astro";
+import OfferPriceBlock from "@/components/OfferPriceBlock.astro";
 import { offerSlugs, getOffer } from "@/data/offers";
 import { reviews } from "@/data/reviews";
 import { site } from "@/data/site";
@@ -45,41 +46,38 @@ const path = `/oferta/${offer.slug}/`;
   </div>
 
   {/* Hero */}
-  <section class="relative overflow-hidden bg-gradient-to-b from-primary-50 via-white to-white">
+  <section class="relative overflow-x-hidden bg-gradient-to-b from-primary-50 via-white to-white">
     <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary-100/60 blur-3xl" aria-hidden="true"></div>
-    <Container class="relative grid items-center gap-10 py-10 sm:py-14 md:grid-cols-2 lg:py-16">
-      <div class="mx-auto max-w-xl text-center md:mx-0 md:text-left">
-        <p class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-medium text-primary-700 ring-1 ring-inset ring-primary-100">
-          <span class="h-2 w-2 rounded-full bg-primary-500"></span>
-          {offer.eyebrow}
-        </p>
-        <p class="mt-4 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-amber-800">
-          {offer.badge}
-        </p>
-        <h1 class="mt-3 text-3xl font-extrabold leading-tight text-ink sm:text-4xl lg:text-[2.75rem]">
+    <Container class="relative flex flex-col gap-4 py-6 sm:gap-5 sm:py-8 md:grid md:grid-cols-2 md:items-center md:gap-8 md:py-10 lg:py-12">
+      <div class="w-full min-w-0 text-center md:col-start-1 md:row-start-1 md:text-left">
+        <div class="flex flex-wrap items-center justify-center gap-2 md:justify-start">
+          <p class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-medium text-primary-700 ring-1 ring-inset ring-primary-100">
+            <span class="h-2 w-2 rounded-full bg-primary-500"></span>
+            {offer.eyebrow}
+          </p>
+          <p class="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-amber-800">
+            {offer.badge}
+          </p>
+        </div>
+        <h1 class="mt-2 text-2xl font-extrabold leading-tight text-ink sm:mt-3 sm:text-4xl lg:text-[2.65rem] lg:leading-tight">
           {offer.heading}
         </h1>
-        <p class="mt-4 text-base leading-relaxed text-ink-soft sm:text-lg">
+        <p class="mt-2 text-base leading-relaxed text-ink-soft sm:mt-3 sm:text-lg">
           {offer.subheading}
         </p>
 
         {/* Preț */}
-        <div class="mt-6 flex flex-wrap items-end justify-center gap-x-4 gap-y-1 md:justify-start">
-          <span class="text-lg font-medium text-ink-soft line-through decoration-2">
-            {offer.priceOld} {offer.currency}
-          </span>
-          <span class="text-4xl font-extrabold text-primary-700 sm:text-5xl">
-            {offer.priceNow} {offer.currency}
-          </span>
-          <span class="rounded-full bg-primary-600 px-3 py-1 text-sm font-bold text-white">
-            Economisești {savings} {offer.currency}
-          </span>
-        </div>
-        {offer.priceNote && (
-          <p class="mt-1 text-sm text-ink-soft md:text-left">{offer.priceNote}</p>
-        )}
+        <OfferPriceBlock
+          class="mt-4 w-full sm:mt-5"
+          priceNow={offer.priceNow}
+          priceOld={offer.priceOld}
+          currency={offer.currency}
+          percentOff={percentOff}
+          savings={savings}
+          priceNote={offer.priceNote}
+        />
 
-        <div class="mx-auto mt-7 flex max-w-sm flex-col gap-3 md:mx-0">
+        <div class="mt-4 flex w-full flex-col gap-2.5 sm:mt-5">
           <WhatsAppButton size="lg" label="Programează-te pe WhatsApp" message={offer.whatsappMessage} class="w-full whitespace-nowrap" />
           <a
             href={`tel:${site.phoneHref}`}
@@ -93,7 +91,7 @@ const path = `/oferta/${offer.slug}/`;
           </a>
         </div>
 
-        <ul class="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink-soft md:justify-start">
+        <ul class="mt-5 hidden flex-col gap-2 text-sm text-ink-soft md:flex md:text-left">
           {
             offer.trustPoints.map((point) => (
               <li class="flex items-center gap-2">
@@ -107,60 +105,76 @@ const path = `/oferta/${offer.slug}/`;
         </ul>
       </div>
 
-      {
-        beforeAfter ? (
-          <BeforeAfterSlider
-            before={beforeAfter.before}
-            beforeAlt={beforeAfter.beforeAlt}
-            after={beforeAfter.after}
-            afterAlt={beforeAfter.afterAlt}
-            note={beforeAfter.note}
-          />
-        ) : heroImage ? (
-          <figure class="mx-auto w-full max-w-md">
-            <div class="aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-secondary-100">
-              <img
-                src={heroImage.src}
-                alt={heroImage.alt}
-                width="640"
-                height="800"
-                fetchpriority="high"
-                decoding="async"
-                class="h-full w-full object-cover"
-              />
+      <div class="w-full min-w-0 md:col-start-2 md:row-start-1 md:row-span-2 [&_.ba]:max-md:aspect-[3/2] [&_.ba]:max-md:max-h-44 [&_.hero-photo]:max-md:aspect-[3/2] [&_.hero-photo]:max-md:max-h-44">
+        {
+          beforeAfter ? (
+            <BeforeAfterSlider
+              before={beforeAfter.before}
+              beforeAlt={beforeAfter.beforeAlt}
+              after={beforeAfter.after}
+              afterAlt={beforeAfter.afterAlt}
+              note={beforeAfter.note}
+            />
+          ) : heroImage ? (
+            <figure class="mx-auto w-full max-w-md md:max-w-none">
+              <div class="hero-photo aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-secondary-100">
+                <img
+                  src={heroImage.src}
+                  alt={heroImage.alt}
+                  width="640"
+                  height="800"
+                  fetchpriority="high"
+                  decoding="async"
+                  class="h-full w-full object-cover"
+                />
+              </div>
+              {heroImage.note && (
+                <figcaption class="mt-2 text-center text-xs text-ink-soft">{heroImage.note}</figcaption>
+              )}
+            </figure>
+          ) : (
+            <div class="relative mx-auto w-full max-w-md md:max-w-none">
+              <div class="hero-photo aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-secondary-100">
+                <img
+                  src={site.doctor.photo}
+                  alt={site.doctor.photoAlt}
+                  width="640"
+                  height="800"
+                  fetchpriority="high"
+                  decoding="async"
+                  class="h-full w-full object-cover"
+                />
+              </div>
+              <div class="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/95 p-4 shadow-lg ring-1 ring-secondary-100 backdrop-blur">
+                <p class="text-sm font-bold text-ink">{site.doctor.name}</p>
+                <p class="text-xs text-ink-soft">{site.doctor.title}</p>
+              </div>
             </div>
-            {heroImage.note && (
-              <figcaption class="mt-2 text-center text-xs text-ink-soft">{heroImage.note}</figcaption>
-            )}
-          </figure>
-        ) : (
-          <div class="relative mx-auto w-full max-w-md">
-            <div class="aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-xl ring-1 ring-secondary-100">
-              <img
-                src={site.doctor.photo}
-                alt={site.doctor.photoAlt}
-                width="640"
-                height="800"
-                fetchpriority="high"
-                decoding="async"
-                class="h-full w-full object-cover"
-              />
-            </div>
-            <div class="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/95 p-4 shadow-lg ring-1 ring-secondary-100 backdrop-blur">
-              <p class="text-sm font-bold text-ink">{site.doctor.name}</p>
-              <p class="text-xs text-ink-soft">{site.doctor.title}</p>
-            </div>
-          </div>
-        )
-      }
+          )
+        }
+      </div>
+
+      {/* Urgență compactă — mobil: după poză */}
+      <div class="w-full min-w-0 rounded-2xl bg-secondary-900 px-4 py-5 text-center text-white md:hidden">
+        <p class="text-base font-bold">Oferta este valabilă un timp limitat</p>
+        <div class="mt-3 rounded-xl bg-white/5 px-3 py-4 ring-1 ring-inset ring-white/10 sm:px-4">
+          <CountdownTimer deadline={offer.deadline} variant="block" expiredText="Oferta s-a încheiat — scrie-ne pentru disponibilitate" />
+        </div>
+        <p class="mt-3 text-xs text-white/80">
+          Locurile din perioada ofertei sunt limitate.
+        </p>
+        <div class="mt-3">
+          <WhatsAppButton size="lg" label="Prinde oferta pe WhatsApp" message={offer.whatsappMessage} />
+        </div>
+      </div>
     </Container>
   </section>
 
-  {/* Urgență + countdown mare */}
-  <section class="bg-secondary-900 py-10 text-white sm:py-12">
+  {/* Urgență + countdown mare (desktop; pe mobil e deja în hero) */}
+  <section class="hidden bg-secondary-900 py-10 text-white sm:py-12 md:block">
     <Container class="flex flex-col items-center gap-5 text-center">
       <h2 class="text-xl font-bold sm:text-2xl">Oferta este valabilă un timp limitat</h2>
-      <div class="rounded-2xl bg-white/5 p-4 ring-1 ring-inset ring-white/10">
+      <div class="w-full rounded-2xl bg-white/5 px-4 py-5 ring-1 ring-inset ring-white/10 sm:px-6">
         <CountdownTimer deadline={offer.deadline} variant="block" expiredText="Oferta s-a încheiat — scrie-ne pentru disponibilitate" />
       </div>
       <p class="max-w-xl text-sm text-white/80">
@@ -269,9 +283,17 @@ const path = `/oferta/${offer.slug}/`;
   {/* CTA final */}
   <section class="bg-primary-700 py-14 text-white sm:py-16">
     <Container class="flex flex-col items-center gap-5 text-center">
-      <h2 class="text-2xl font-extrabold sm:text-3xl">
-        {offer.priceNow} {offer.currency} în loc de {offer.priceOld} {offer.currency}
-      </h2>
+      <h2 class="text-2xl font-extrabold sm:text-3xl">Încă poți profita de ofertă</h2>
+      <OfferPriceBlock
+        class="w-full max-w-md"
+        variant="dark"
+        priceNow={offer.priceNow}
+        priceOld={offer.priceOld}
+        currency={offer.currency}
+        percentOff={percentOff}
+        savings={savings}
+        priceNote={offer.priceNote}
+      />
       <p class="max-w-xl text-white/90">
         Scrie-ne pe WhatsApp și îți propunem cel mai apropiat interval disponibil.
       </p>
