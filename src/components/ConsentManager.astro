@@ -1,0 +1,9 @@
+---
+// Orchestrează consimțământul: bannerul de cookies + inițializarea tracking-ului.
+// Se include o singură dată în BaseLayout.
+import CookieBanner from "@/components/CookieBanner.astro";
+import TrackingScripts from "@/components/TrackingScripts.astro";
+---
+
+<CookieBanner />
+<TrackingScripts />

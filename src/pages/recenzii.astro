@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import ReviewCard from "@/components/ReviewCard.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import { site } from "@/data/site";
+import { reviews } from "@/data/reviews";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Recenzii", path: "/recenzii/" },
+];
+// NOTĂ: nu folosim Review / AggregateRating schema (markup self-serving evitat).
+---
+
+<BaseLayout
+  title="Recenzii pacienți North Dent | Râmnicu Vâlcea"
+  description="Recenzii lăsate pe Google de pacienții North Dent din Râmnicu Vâlcea. Vezi ce spun cei care ne-au trecut pragul."
+  path="/recenzii/"
+>
+  <section class="bg-gradient-to-b from-primary-50/60 to-white">
+    <Container class="py-10 sm:py-14">
+      <Breadcrumbs items={breadcrumbs} />
+      <h1 class="mt-5 text-3xl font-extrabold text-ink sm:text-4xl">
+        Recenzii de la pacienți
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        Recenzii lăsate pe Google de pacienții North Dent. Îți mulțumim pentru
+        încredere.
+      </p>
+      <div class="mt-6">
+        <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" data-track="maps_click" class="text-sm font-semibold text-primary-700 hover:text-primary-800">
+          Vezi profilul nostru pe Google
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-12">
+    <Container>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {reviews.map((review) => <ReviewCard review={review} />)}
+      </div>
+      <div class="mt-10 rounded-3xl bg-primary-50 p-8 text-center">
+        <h2 class="text-xl font-bold text-ink">Ai fost pacientul nostru?</h2>
+        <p class="mt-2 text-ink-soft">O recenzie pe Google ne ajută mult. Îți mulțumim!</p>
+        <div class="mt-5 flex justify-center">
+          <WhatsAppButton label="Scrie-ne pe WhatsApp" />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <CtaSection />
+</BaseLayout>

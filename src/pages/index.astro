@@ -1,0 +1,161 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Hero from "@/components/Hero.astro";
+import ServiceGrid from "@/components/ServiceGrid.astro";
+import DoctorCard from "@/components/DoctorCard.astro";
+import ReviewCard from "@/components/ReviewCard.astro";
+import FaqAccordion from "@/components/FaqAccordion.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import ContactDetails from "@/components/ContactDetails.astro";
+import MapSection from "@/components/MapSection.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import { site } from "@/data/site";
+import { getFeaturedServices } from "@/data/services";
+import { reviews } from "@/data/reviews";
+import { homepageFaqs } from "@/data/faqs";
+import { faqSchema } from "@/lib/schema";
+import Icon from "@/components/Icon.astro";
+import type { IconName } from "@/lib/icons";
+
+const featured = getFeaturedServices();
+
+const whyUs: { icon: IconName; title: string; text: string }[] = [
+  { icon: "messageCircle", title: "Abordare empatică", text: "Te ascultăm și mergem în ritmul tău." },
+  { icon: "compass", title: "Tratamente explicate clar", text: "Îți explicăm fiecare pas, pe înțelesul tău." },
+  { icon: "leaf", title: "Atmosferă calmă", text: "Un mediu liniștit, potrivit inclusiv pentru pacienți anxioși." },
+  { icon: "building2", title: "Cabinet modern", text: "Spațiu curat și dotat pentru confortul tău." },
+  { icon: "users", title: "Pentru adulți și copii", text: "Îngrijire potrivită pentru toată familia." },
+  { icon: "smartphone", title: "Programări pe WhatsApp", text: "Rapid și simplu, fără apeluri lungi." },
+];
+---
+
+<BaseLayout
+  title="Cabinet stomatologic în Râmnicu Vâlcea | North Dent"
+  description="North Dent — cabinet stomatologic modern în Zona Nord din Râmnicu Vâlcea. Dr. Zamfirescu Laura-Maria, o abordare calmă și empatică. Programează-te pe WhatsApp."
+  path="/"
+  jsonLd={faqSchema(homepageFaqs)}
+>
+  <Hero
+    title="Cabinet stomatologic în Râmnicu Vâlcea"
+    subtitle="North Dent este un cabinet modern din Zona Nord a orașului Râmnicu Vâlcea. Dr. Zamfirescu Laura-Maria îți oferă o abordare calmă, empatică și explicații clare la fiecare pas."
+    trustIndicators={["Recenzii de 5★ pe Google", "Cabinet modern", "Pentru adulți și copii"]}
+  />
+
+  {/* Servicii principale */}
+  <section class="py-14 sm:py-16">
+    <Container>
+      <SectionHeading eyebrow="Servicii" title="Servicii principale">
+        <p>Îngrijire completă, de la igienizare la estetică și lucrări dentare.</p>
+      </SectionHeading>
+      <div class="mt-8">
+        <ServiceGrid services={featured} columns={4} />
+      </div>
+      <div class="mt-8">
+        <a href="/servicii/" class="inline-flex items-center gap-1 text-sm font-semibold text-primary-700 hover:text-primary-800">
+          Vezi toate serviciile
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.3 4.3a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 0 1-1.4-1.4L11.6 10 7.3 5.7a1 1 0 0 1 0-1.4Z" clip-rule="evenodd" /></svg>
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  {/* De ce North Dent */}
+  <section class="bg-surface-muted py-14 sm:py-16">
+    <Container>
+      <SectionHeading eyebrow="De ce North Dent" title="Grijă, calm și claritate la fiecare vizită" />
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          whyUs.map((item) => (
+            <div class="rounded-2xl border border-secondary-100 bg-white p-5">
+              <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary-700" aria-hidden="true">
+                <Icon name={item.icon} class="h-5 w-5" />
+              </span>
+              <h3 class="mt-3 font-bold text-ink">{item.title}</h3>
+              <p class="mt-1 text-sm text-ink-soft">{item.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  {/* Medic */}
+  <section class="py-14 sm:py-16">
+    <Container>
+      <SectionHeading eyebrow="Medicul tău" title="Cine te tratează" />
+      <div class="mt-8">
+        <DoctorCard />
+      </div>
+    </Container>
+  </section>
+
+  {/* Pacienți anxioși */}
+  <section class="py-6 sm:py-10">
+    <Container>
+      <div class="rounded-3xl bg-primary-50 p-8 sm:p-10">
+        <div class="max-w-2xl">
+          <h2 class="text-2xl font-bold text-ink">Ți-e teamă de dentist? Este în regulă.</h2>
+          <p class="mt-3 leading-relaxed text-ink-soft">
+            Înțelegem că o vizită la stomatolog poate fi stresantă. La North Dent
+            discutăm fiecare tratament pas cu pas, mergem în ritmul tău și ne
+            dorim ca fiecare pacient să se simtă ascultat și în siguranță.
+          </p>
+          <div class="mt-6">
+            <WhatsAppButton message="Bună ziua! Sunt o persoană anxioasă și aș dori să discutăm despre o programare." />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  {/* Recenzii */}
+  <section class="py-14 sm:py-16">
+    <Container>
+      <SectionHeading eyebrow="Recenzii" title="Ce spun pacienții noștri">
+        <p>Recenzii lăsate pe Google de pacienții North Dent.</p>
+      </SectionHeading>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {reviews.map((review) => <ReviewCard review={review} />)}
+      </div>
+      <div class="mt-8">
+        <a href="/recenzii/" class="text-sm font-semibold text-primary-700 hover:text-primary-800">
+          Vezi toate recenziile
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  {/* Locație */}
+  <section class="bg-surface-muted py-14 sm:py-16">
+    <Container>
+      <SectionHeading eyebrow="Locație" title={`Ne găsești în ${site.address.areaLabel}`} />
+      <div class="mt-8 grid gap-8 lg:grid-cols-2">
+        <div>
+          <ContactDetails />
+          <div class="mt-6">
+            <WhatsAppButton />
+          </div>
+        </div>
+        <MapSection />
+      </div>
+    </Container>
+  </section>
+
+  {/* FAQ */}
+  <section class="py-14 sm:py-16">
+    <Container size="narrow">
+      <SectionHeading eyebrow="Întrebări frecvente" title="Răspunsuri rapide" align="center" class="mx-auto" />
+      <div class="mt-8">
+        <FaqAccordion faqs={homepageFaqs} />
+      </div>
+      <p class="mt-6 text-center text-sm text-ink-soft">
+        Ai altă întrebare? <a href="/faq/" class="font-semibold text-primary-700 hover:text-primary-800">Vezi toate întrebările</a>
+      </p>
+    </Container>
+  </section>
+
+  {/* CTA final */}
+  <CtaSection />
+</BaseLayout>

@@ -1,0 +1,129 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import ServiceGrid from "@/components/ServiceGrid.astro";
+import ContactDetails from "@/components/ContactDetails.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import { site } from "@/data/site";
+import { getFeaturedServices } from "@/data/services";
+import { personSchema } from "@/lib/schema";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+const path = `/${site.doctor.slug}/`;
+const featured = getFeaturedServices();
+
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Medici", path: "/medici/" },
+  { name: site.doctor.name, path },
+];
+---
+
+<BaseLayout
+  title={`${site.doctor.name} | Medic stomatolog Râmnicu Vâlcea`}
+  description={`${site.doctor.name}, medic stomatolog la North Dent în Râmnicu Vâlcea. Abordare calmă, empatică și explicații clare la fiecare pas. Programează-te pe WhatsApp.`}
+  path={path}
+  jsonLd={personSchema()}
+>
+  <section class="bg-gradient-to-b from-primary-50/60 to-white">
+    <Container class="py-10 sm:py-14">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="mt-6 grid gap-6 md:grid-cols-2 md:items-center md:gap-8 lg:gap-10">
+        <div class="aspect-[3/2] w-full overflow-hidden rounded-3xl bg-secondary-50 shadow-sm ring-1 ring-secondary-100 sm:aspect-[16/9] md:aspect-[4/3]">
+          <img
+            src={site.doctor.photo}
+            alt={site.doctor.photoAlt}
+            width="800"
+            height="600"
+            fetchpriority="high"
+            decoding="async"
+            class="h-full w-full object-cover object-[center_15%]"
+          />
+        </div>
+        <div>
+          <h1 class="text-3xl font-extrabold leading-tight text-ink sm:text-4xl">
+            {site.doctor.name} — medic stomatolog în Râmnicu Vâlcea
+          </h1>
+          <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+            Sunt medic stomatolog la North Dent, în zona Nord din Râmnicu Vâlcea.
+            Îmi doresc ca fiecare vizită să fie o experiență calmă, în care te
+            simți ascultat, înțelegi ce ți se întâmplă și iei deciziile împreună
+            cu mine.
+          </p>
+          <div class="mt-6">
+            <WhatsAppButton size="lg" message={`Bună ziua! Aș dori o programare la ${site.doctor.name}.`} />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <Container class="py-12">
+    <div class="grid gap-12 lg:grid-cols-3">
+      <div class="space-y-10 lg:col-span-2">
+        <section class="space-y-4 leading-relaxed text-ink-soft">
+          <h2 class="text-xl font-bold text-ink">Abordarea mea</h2>
+          <p>
+            Cred că un tratament bun începe cu o discuție sinceră. Înainte de
+            orice intervenție, îmi rezerv timp să înțeleg ce te aduce la cabinet
+            și ce îți dorești, apoi îți explic situația pe înțelesul tău — fără
+            termeni complicați și fără să te grăbesc.
+          </p>
+          <p>
+            Îți prezint opțiunile realiste, cu avantaje și limite, și stabilim
+            împreună un plan pe care îl înțelegi și cu care ești de acord.
+            Pentru mine contează ca deciziile despre sănătatea ta să fie luate
+            împreună, nu în locul tău.
+          </p>
+        </section>
+
+        <section class="space-y-4 leading-relaxed text-ink-soft">
+          <h2 class="text-xl font-bold text-ink">Pentru pacienții anxioși</h2>
+          <p>
+            Dacă ți-e teamă de dentist, nu ești singur — și nu e nimic în neregulă
+            cu asta. Multe persoane amână vizita din cauza unor experiențe
+            neplăcute din trecut. Îți spun de la început: mergem exact în ritmul
+            tău.
+          </p>
+          <p>
+            Discutăm fiecare pas înainte de a începe, ne oprim ori de câte ori ai
+            nevoie de o pauză și ne asigurăm că te simți confortabil pe tot
+            parcursul. Scopul meu este să pleci de la cabinet cu mai multă
+            încredere decât ai venit.
+          </p>
+        </section>
+
+        <section class="space-y-4 leading-relaxed text-ink-soft">
+          <h2 class="text-xl font-bold text-ink">Pentru adulți, copii și familii</h2>
+          <p>
+            La North Dent sunt binevenite toate vârstele — de la controalele
+            adulților până la primele vizite ale celor mici. Cu copiii sunt
+            răbdătoare și le explic totul pe înțelesul lor, ca vizita la dentist
+            să devină o experiență cât mai plăcută.
+          </p>
+        </section>
+      </div>
+
+      <aside class="space-y-6 lg:col-span-1">
+        <div class="rounded-2xl border border-secondary-100 bg-surface-muted p-6">
+          <h2 class="text-base font-bold text-ink">Unde mă găsești</h2>
+          <div class="mt-4">
+            <ContactDetails showHours={true} />
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="mt-12">
+      <SectionHeading title="Servicii principale" as="h2" />
+      <div class="mt-6">
+        <ServiceGrid services={featured} columns={4} mobileColumns={2} />
+      </div>
+    </section>
+  </Container>
+
+  <CtaSection message={`Bună ziua! Aș dori o programare la ${site.doctor.name}.`} />
+</BaseLayout>

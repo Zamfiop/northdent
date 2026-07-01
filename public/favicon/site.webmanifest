@@ -1,0 +1,17 @@
+{
+  "name": "North Dent",
+  "short_name": "North Dent",
+  "description": "Cabinet stomatologic în Râmnicu Vâlcea",
+  "lang": "ro",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#069478",
+  "icons": [
+    {
+      "src": "/favicon/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import DoctorCard from "@/components/DoctorCard.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import { site } from "@/data/site";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Medici", path: "/medici/" },
+];
+---
+
+<BaseLayout
+  title="Medici | North Dent Râmnicu Vâlcea"
+  description="Echipa medicală North Dent din Râmnicu Vâlcea. Cunoaște medicul care te tratează — abordare calmă, empatică și explicații clare la fiecare pas."
+  path="/medici/"
+>
+  <section class="bg-gradient-to-b from-primary-50/60 to-white">
+    <Container class="py-8 sm:py-10">
+      <Breadcrumbs items={breadcrumbs} />
+      <h1 class="mt-4 text-3xl font-extrabold text-ink sm:text-4xl">
+        Medicii North Dent
+      </h1>
+      <p class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        La North Dent te tratăm cu grijă și răbdare. Cunoaște medicul care îți
+        va fi alături la fiecare pas.
+      </p>
+
+      <h2 class="mt-6 text-xl font-bold text-ink">Echipa medicală</h2>
+      <div class="mt-4">
+        {/* DoctorCard linkează către pagina dedicată a medicului. */}
+        <DoctorCard />
+      </div>
+      {/* TODO: adaugă aici alți medici/colaboratori când este cazul. */}
+    </Container>
+  </section>
+
+  <CtaSection message={`Bună ziua! Aș dori o programare la ${site.doctor.name}.`} />
+</BaseLayout>

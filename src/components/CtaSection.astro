@@ -1,0 +1,36 @@
+---
+import Container from "@/components/Container.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import { site } from "@/data/site";
+
+interface Props {
+  title?: string;
+  text?: string;
+  message?: string;
+}
+const {
+  title = "Ai nevoie de o consultație?",
+  text = "Programarea se poate face rapid pe WhatsApp. Îți răspundem și îți propunem un interval potrivit.",
+  message,
+} = Astro.props;
+---
+
+<section class="py-14 sm:py-16">
+  <Container>
+    <div class="relative overflow-hidden rounded-3xl bg-secondary-800 px-6 py-12 text-center sm:px-12">
+      <div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary-500/20 blur-3xl" aria-hidden="true"></div>
+      <h2 class="relative text-2xl font-bold text-white sm:text-3xl">{title}</h2>
+      <p class="relative mx-auto mt-3 max-w-xl text-secondary-100">{text}</p>
+      <div class="relative mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <WhatsAppButton size="lg" message={message} />
+        <a
+          href={`tel:${site.phoneHref}`}
+          data-track="phone_click"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 px-7 py-3.5 text-base font-semibold text-white ring-1 ring-inset ring-white/30 hover:bg-white/20"
+        >
+          Sună: {site.phoneDisplay}
+        </a>
+      </div>
+    </div>
+  </Container>
+</section>

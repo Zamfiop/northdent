@@ -1,0 +1,30 @@
+---
+import { site } from "@/data/site";
+
+interface Props {
+  variant?: "wide" | "square";
+  theme?: "default" | "white";
+  class?: string;
+}
+
+const { variant = "wide", theme = "default", class: className = "" } = Astro.props;
+
+const src =
+  variant === "wide"
+    ? theme === "white"
+      ? site.logo.wideWhite
+      : site.logo.wide
+    : theme === "white"
+      ? site.logo.squareWhite
+      : site.logo.square;
+---
+
+<img
+  src={src}
+  alt={site.brand}
+  width={variant === "wide" ? 128 : 28}
+  height={variant === "wide" ? 32 : 28}
+  class:list={[variant === "wide" ? "h-7 w-auto sm:h-8" : "h-7 w-7", className]}
+  loading="eager"
+  decoding="async"
+/>

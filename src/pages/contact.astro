@@ -1,0 +1,63 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import ContactDetails from "@/components/ContactDetails.astro";
+import MapSection from "@/components/MapSection.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import { site } from "@/data/site";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Contact", path: "/contact/" },
+];
+---
+
+<BaseLayout
+  title="Contact North Dent | Cabinet stomatologic Râmnicu Vâlcea"
+  description="Contactează North Dent în Râmnicu Vâlcea. Programează-te pe WhatsApp la 0747 384 848 sau vezi locația cabinetului din Zona Nord."
+  path="/contact/"
+>
+  <section class="bg-gradient-to-b from-primary-50/60 to-white">
+    <Container class="py-10 sm:py-14">
+      <Breadcrumbs items={breadcrumbs} />
+      <h1 class="mt-5 text-3xl font-extrabold text-ink sm:text-4xl">
+        Contact
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        Cel mai simplu mod de a te programa este pe WhatsApp. Îți răspundem și
+        îți propunem un interval potrivit.
+      </p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <WhatsAppButton size="lg" />
+        <a
+          href={`tel:${site.phoneHref}`}
+          data-track="phone_click"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-base font-semibold text-secondary-800 ring-1 ring-inset ring-secondary-200 hover:bg-secondary-50"
+        >
+          Sună: {site.phoneDisplay}
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-12">
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-2">
+        <div>
+          <h2 class="text-xl font-bold text-ink">Date de contact</h2>
+          <div class="mt-6">
+            <ContactDetails />
+          </div>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-ink">Unde ne găsești</h2>
+          <div class="mt-6">
+            <MapSection />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

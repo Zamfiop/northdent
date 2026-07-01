@@ -1,0 +1,51 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import { blogPosts } from "@/data/blog";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+// Blog pregătit tehnic, dar NU promovat în navigația principală în v1.
+const posts = blogPosts;
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Articole utile", path: "/blog/" },
+];
+---
+
+<BaseLayout
+  title="Articole utile | North Dent Râmnicu Vâlcea"
+  description="Articole utile despre sănătatea dentară de la North Dent. Secțiune în curând."
+  path="/blog/"
+>
+  <Container class="py-12 sm:py-16">
+    <Breadcrumbs items={breadcrumbs} />
+    <div class="mt-8 text-center">
+    <h1 class="text-3xl font-extrabold text-ink sm:text-4xl">Articole utile</h1>
+    {
+      posts.length === 0 ? (
+        <div class="mx-auto mt-6 max-w-xl">
+          <p class="text-lg text-ink-soft">
+            Pregătim articole utile despre sănătatea dentară. Revino în curând!
+          </p>
+          <div class="mt-8 flex justify-center">
+            <WhatsAppButton />
+          </div>
+        </div>
+      ) : (
+        <ul class="mx-auto mt-10 max-w-2xl space-y-4 text-left">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.slug}/`} class="text-lg font-semibold text-primary-700 hover:text-primary-800">
+                {post.title}
+              </a>
+              <p class="text-sm text-ink-soft">{post.description}</p>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    </div>
+  </Container>
+</BaseLayout>

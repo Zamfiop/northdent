@@ -1,0 +1,68 @@
+---
+import "@/styles/global.css";
+import SeoHead from "@/components/SeoHead.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
+import ConsentManager from "@/components/ConsentManager.astro";
+import JsonLd from "@/components/JsonLd.astro";
+import type { SeoInput } from "@/lib/seo";
+import {
+  dentistSchema,
+  organizationSchema,
+  websiteSchema,
+} from "@/lib/schema";
+
+interface Props extends SeoInput {
+  /** Schema JSON-LD suplimentară specifică paginii */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Include schema de business global (implicit true) */
+  includeBusinessSchema?: boolean;
+}
+const {
+  jsonLd,
+  includeBusinessSchema = true,
+  ...seo
+} = Astro.props;
+
+const globalSchema = includeBusinessSchema
+  ? [dentistSchema(), organizationSchema(), websiteSchema()]
+  : [];
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    {/* TODO: generează un set complet de favicon (favicon.ico, apple-touch-icon.png)
+        și adaugă-l în /public/favicon/. Vezi și /public/images/ pentru og-default.jpg. */}
+    <meta name="theme-color" content="#069478" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <SeoHead {...seo} />
+    {globalSchema.length > 0 && <JsonLd schema={globalSchema} />}
+    {jsonLd && <JsonLd schema={jsonLd} />}
+  </head>
+  <body class="flex min-h-screen flex-col bg-white">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-secondary-800 focus:shadow"
+    >
+      Sari la conținut
+    </a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <StickyWhatsApp />
+    <ConsentManager />
+  </body>
+</html>

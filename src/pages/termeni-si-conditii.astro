@@ -1,0 +1,52 @@
+---
+import LegalLayout from "@/layouts/LegalLayout.astro";
+import { site } from "@/data/site";
+---
+
+<LegalLayout
+  title="Termeni și condiții | North Dent"
+  description="Termenii și condițiile de utilizare a site-ului North Dent."
+  path="/termeni-si-conditii/"
+  heading="Termeni și condiții"
+  lastUpdated="TODO: adaugă data"
+>
+  {/* TODO JURIDIC: text placeholder. Verificați cu un specialist înainte de publicare. */}
+  <p>
+    Prin utilizarea site-ului {site.url} ești de acord cu termenii de mai jos.
+    Documentul nu constituie consultanță juridică finală și trebuie verificat de
+    un specialist înainte de publicare.
+  </p>
+
+  <h2>Despre site</h2>
+  <p>
+    Site-ul este administrat de {site.legalName} și oferă informații despre
+    serviciile cabinetului stomatologic {site.brand}.
+  </p>
+
+  <h2>Conținut informativ</h2>
+  <p>
+    Informațiile de pe site au caracter general și informativ și nu înlocuiesc
+    o consultație de specialitate. Planul de tratament se stabilește după o
+    consultație în cabinet.
+  </p>
+
+  <h2>Programări</h2>
+  <p>
+    Programările se pot face pe WhatsApp, telefonic sau prin email. TODO
+    JURIDIC: detaliază politica de programare/anulare dacă este cazul.
+  </p>
+
+  <h2>Proprietate intelectuală</h2>
+  <p>
+    Conținutul site-ului (texte, imagini, siglă) aparține {site.legalName} sau
+    este folosit cu acordul deținătorilor de drepturi.
+  </p>
+
+  <h2>Limitarea răspunderii</h2>
+  <p>TODO JURIDIC: adaugă clauze de limitare a răspunderii verificate juridic.</p>
+
+  <h2>Contact</h2>
+  <p>
+    Pentru întrebări, scrie-ne la <a href={site.emailHref}>{site.email}</a>.
+  </p>
+</LegalLayout>

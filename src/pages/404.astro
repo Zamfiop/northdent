@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import { mainNav } from "@/data/navigation";
+---
+
+<BaseLayout
+  title="Pagina nu a fost găsită (404) | North Dent"
+  description="Ne pare rău, pagina căutată nu există. Descoperă serviciile North Dent sau programează-te pe WhatsApp."
+  path="/404/"
+  noindex={true}
+  includeBusinessSchema={false}
+>
+  <Container class="flex flex-col items-center py-20 text-center sm:py-28">
+    <p class="text-6xl font-extrabold text-primary-600">404</p>
+    <h1 class="mt-4 text-2xl font-bold text-ink sm:text-3xl">
+      Pagina nu a fost găsită
+    </h1>
+    <p class="mt-3 max-w-md text-ink-soft">
+      Ne pare rău, pagina căutată nu există sau a fost mutată. Te putem ajuta cu
+      o programare rapidă pe WhatsApp.
+    </p>
+    <div class="mt-7">
+      <WhatsAppButton size="lg" />
+    </div>
+    <nav class="mt-10" aria-label="Linkuri utile">
+      <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
+        {
+          mainNav.map((item) => (
+            <li>
+              <a href={item.href} class="font-medium text-primary-700 hover:text-primary-800">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </Container>
+</BaseLayout>

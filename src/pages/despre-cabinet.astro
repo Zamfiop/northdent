@@ -1,0 +1,81 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import DoctorCard from "@/components/DoctorCard.astro";
+import MapSection from "@/components/MapSection.astro";
+import ContactDetails from "@/components/ContactDetails.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import { site } from "@/data/site";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Despre cabinet", path: "/despre-cabinet/" },
+];
+
+const values = [
+  { title: "Calm și empatie", text: "Un mediu liniștit, în care fiecare pacient este ascultat." },
+  { title: "Claritate", text: "Îți explicăm fiecare pas și opțiunile disponibile." },
+  { title: "Modern și curat", text: "Un cabinet îngrijit, dotat pentru confortul tău." },
+  { title: "Accesibil", text: "Programări simple pe WhatsApp și o abordare deschisă." },
+];
+---
+
+<BaseLayout
+  title="Despre cabinetul North Dent | Râmnicu Vâlcea"
+  description="Despre North Dent — cabinet stomatologic modern din Zona Nord a orașului Râmnicu Vâlcea. Abordare calmă, empatică și profesionistă pentru toată familia."
+  path="/despre-cabinet/"
+>
+  <section class="bg-gradient-to-b from-primary-50/60 to-white">
+    <Container class="py-10 sm:py-14">
+      <Breadcrumbs items={breadcrumbs} />
+      <h1 class="mt-5 text-3xl font-extrabold text-ink sm:text-4xl">
+        Despre cabinetul North Dent
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        North Dent este un cabinet stomatologic modern, situat în {site.address.areaLabel}.
+        Ne dorim o experiență calmă și primitoare pentru fiecare pacient — adulți,
+        copii și familii.
+      </p>
+    </Container>
+  </section>
+
+  <section class="py-12">
+    <Container>
+      <SectionHeading eyebrow="Valorile noastre" title="Ce ne ghidează" />
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          values.map((v) => (
+            <div class="rounded-2xl border border-secondary-100 bg-white p-5">
+              <h3 class="font-bold text-ink">{v.title}</h3>
+              <p class="mt-2 text-sm text-ink-soft">{v.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-6">
+    <Container>
+      <SectionHeading eyebrow="Medicul" title="Cine te tratează" />
+      <div class="mt-8">
+        <DoctorCard />
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-12">
+    <Container>
+      <SectionHeading eyebrow="Locație" title={`Ne găsești în ${site.address.areaLabel}`} />
+      <div class="mt-8 grid gap-8 lg:grid-cols-2">
+        <ContactDetails />
+        <MapSection />
+      </div>
+    </Container>
+  </section>
+
+  <CtaSection />
+</BaseLayout>

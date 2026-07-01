@@ -1,0 +1,44 @@
+---
+import { site } from "@/data/site";
+import WhatsAppButton from "@/components/WhatsAppButton.astro";
+
+interface Props {
+  /** Afișează butonul WhatsApp în card */
+  showCta?: boolean;
+  /** Afișează linkul către pagina dedicată */
+  showLink?: boolean;
+}
+const { showCta = true, showLink = true } = Astro.props;
+---
+
+<div class="grid items-center gap-6 rounded-3xl border border-secondary-100 bg-white p-6 shadow-sm sm:grid-cols-[auto_1fr] sm:p-8">
+  <div class="mx-auto h-32 w-32 shrink-0 overflow-hidden rounded-2xl bg-secondary-50 sm:mx-0">
+    <img
+      src={site.doctor.photo}
+      alt={site.doctor.photoAlt}
+      width="128"
+      height="128"
+      loading="lazy"
+      decoding="async"
+      class="h-full w-full object-cover"
+    />
+  </div>
+  <div>
+    <h3 class="text-xl font-bold text-ink">{site.doctor.name}</h3>
+    <p class="mt-1 text-sm font-medium text-primary-700">{site.doctor.title}</p>
+    <p class="mt-3 text-sm leading-relaxed text-ink-soft">
+      O abordare calmă și empatică, cu explicații clare la fiecare pas. Ne dorim
+      ca fiecare pacient să se simtă ascultat și în siguranță.
+    </p>
+    <div class="mt-5 flex flex-wrap items-center gap-3">
+      {showCta && <WhatsAppButton label="Programează-te pe WhatsApp" />}
+      {
+        showLink && (
+          <a href={`/${site.doctor.slug}/`} class="text-sm font-semibold text-primary-700 underline underline-offset-4 hover:text-primary-800">
+            Află mai multe despre medic
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

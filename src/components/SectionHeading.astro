@@ -1,0 +1,39 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  /** Nivel heading pentru ierarhie corectă (implicit h2) */
+  as?: "h2" | "h3";
+  align?: "left" | "center";
+  class?: string;
+}
+const {
+  eyebrow,
+  title,
+  as = "h2",
+  align = "left",
+  class: className = "",
+} = Astro.props;
+const Heading = as as any;
+const alignment = align === "center" ? "text-center mx-auto" : "text-left";
+---
+
+<div class={`max-w-2xl ${alignment} ${className}`}>
+  {
+    eyebrow && (
+      <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-primary-600">
+        {eyebrow}
+      </p>
+    )
+  }
+  <Heading class="text-2xl font-bold text-ink sm:text-3xl">
+    {title}
+  </Heading>
+  {
+    Astro.slots.has("default") && (
+      <div class="mt-3 text-base leading-relaxed text-ink-soft">
+        <slot />
+      </div>
+    )
+  }
+</div>

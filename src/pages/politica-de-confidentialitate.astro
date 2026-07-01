@@ -1,0 +1,61 @@
+---
+import LegalLayout from "@/layouts/LegalLayout.astro";
+import { site } from "@/data/site";
+---
+
+<LegalLayout
+  title="Politică de confidențialitate | North Dent"
+  description="Politica de confidențialitate North Dent: cum colectăm, folosim și protejăm datele cu caracter personal."
+  path="/politica-de-confidentialitate/"
+  heading="Politică de confidențialitate"
+  lastUpdated="TODO: adaugă data"
+>
+  {/* TODO JURIDIC: text placeholder. Verificați cu un specialist înainte de publicare. */}
+  <p>
+    Această politică descrie modul în care {site.brand} ({site.legalName})
+    colectează și prelucrează datele cu caracter personal ale vizitatorilor
+    site-ului {site.url}. Documentul nu constituie consultanță juridică finală
+    și trebuie verificat de un specialist înainte de publicare.
+  </p>
+
+  <h2>Operatorul de date</h2>
+  <p>
+    {site.legalName}, cu punct de lucru la adresa {site.address.streetAddress},
+    {site.address.addressLocality}. Ne poți contacta la
+    <a href={site.emailHref}>{site.email}</a> sau la telefon {site.phoneDisplay}.
+  </p>
+
+  <h2>Ce date colectăm</h2>
+  <ul>
+    <li>Date de contact pe care ni le transmiți voluntar (ex. prin WhatsApp, telefon sau email).</li>
+    <li>Date tehnice și de utilizare colectate prin cookie-uri, doar cu consimțământul tău. TODO: detaliază.</li>
+  </ul>
+
+  <h2>Scopurile prelucrării</h2>
+  <ul>
+    <li>Programarea și comunicarea cu pacienții.</li>
+    <li>Îmbunătățirea site-ului și măsurarea audienței (doar cu acord).</li>
+  </ul>
+
+  <h2>Temeiul legal</h2>
+  <p>TODO JURIDIC: precizează temeiurile (consimțământ, interes legitim, obligație legală etc.).</p>
+
+  <h2>Drepturile tale (GDPR)</h2>
+  <p>
+    Ai dreptul de acces, rectificare, ștergere, restricționare, portabilitate și
+    opoziție, precum și dreptul de a-ți retrage consimțământul. TODO JURIDIC:
+    detaliază modalitatea de exercitare.
+  </p>
+
+  <h2>Cookie-uri</h2>
+  <p>
+    Detalii despre cookie-uri găsești în
+    <a href="/politica-cookies/">Politica cookies</a>.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Pentru orice întrebare privind datele tale, scrie-ne la
+    <a href={site.emailHref}>{site.email}</a>.
+  </p>
+</LegalLayout>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import FaqAccordion from "@/components/FaqAccordion.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import { generalFaqs } from "@/data/faqs";
+import { faqSchema } from "@/lib/schema";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Întrebări frecvente", path: "/faq/" },
+];
+// FAQ schema DOAR pentru întrebările vizibile pe pagină.
+---
+
+<BaseLayout
+  title="Întrebări frecvente | North Dent Râmnicu Vâlcea"
+  description="Răspunsuri la întrebările frecvente despre cabinetul North Dent din Râmnicu Vâlcea: programări, locație, program și servicii."
+  path="/faq/"
+  jsonLd={faqSchema(generalFaqs)}
+>
+  <section class="bg-gradient-to-b from-primary-50/60 to-white">
+    <Container size="narrow" class="py-10 sm:py-14">
+      <Breadcrumbs items={breadcrumbs} />
+      <h1 class="mt-5 text-3xl font-extrabold text-ink sm:text-4xl">
+        Întrebări frecvente
+      </h1>
+      <p class="mt-4 text-lg leading-relaxed text-ink-soft">
+        Am adunat aici răspunsuri la cele mai des întâlnite întrebări. Dacă nu
+        găsești ce cauți, scrie-ne pe WhatsApp.
+      </p>
+    </Container>
+  </section>
+
+  <section class="py-12">
+    <Container size="narrow">
+      <FaqAccordion faqs={generalFaqs} />
+    </Container>
+  </section>
+
+  <CtaSection />
+</BaseLayout>

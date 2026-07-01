@@ -1,0 +1,40 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heading: string;
+  lastUpdated?: string;
+}
+const { title, description, path, heading, lastUpdated } = Astro.props;
+
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: heading, path },
+];
+---
+
+<BaseLayout title={title} description={description} path={path}>
+  <Container size="narrow" class="py-10 sm:py-14">
+    <Breadcrumbs items={breadcrumbs} />
+    <h1 class="mt-5 text-3xl font-extrabold text-ink sm:text-4xl">{heading}</h1>
+    {
+      lastUpdated && (
+        <p class="mt-2 text-sm text-ink-soft">Ultima actualizare: {lastUpdated}</p>
+      )
+    }
+    {/*
+      TODO JURIDIC: Textele legale de mai jos sunt PLACEHOLDER și trebuie
+      verificate de un specialist înainte de publicare. Nu constituie
+      consultanță juridică finală.
+    */}
+    <div class="prose-legal mt-8">
+      <slot />
+    </div>
+  </Container>
+</BaseLayout>

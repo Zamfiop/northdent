@@ -1,0 +1,23 @@
+---
+import ServiceCard from "@/components/ServiceCard.astro";
+import type { Service } from "@/data/services";
+
+interface Props {
+  services: Service[];
+  columns?: 2 | 3 | 4;
+  /** Număr de coloane pe ecrane înguste (implicit 1) */
+  mobileColumns?: 1 | 2;
+}
+const { services, columns = 3, mobileColumns = 1 } = Astro.props;
+const mobileClass = mobileColumns === 2 ? "grid-cols-2" : "grid-cols-1";
+const colClass =
+  columns === 4
+    ? `${mobileClass} sm:grid-cols-2 lg:grid-cols-4`
+    : columns === 2
+      ? `${mobileClass} sm:grid-cols-2`
+      : `${mobileClass} sm:grid-cols-2 lg:grid-cols-3`;
+---
+
+<div class={`grid gap-4 ${colClass}`}>
+  {services.map((service) => <ServiceCard service={service} />)}
+</div>

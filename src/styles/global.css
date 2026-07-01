@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/*
+  North Dent design system
+  Direcție vizuală: medical curat, modern, cald.
+  - primary: turcoaz / verde medical (CTA, accente de încredere)
+  - secondary: albastru închis / petrol (text, elemente de încredere)
+  - accent: cyan/verde deschis calm
+  - background: alb / gri foarte deschis
+  - text: slate închis / albastru petrol
+  Contrast verificat pentru accesibilitate (evită contrast slab).
+*/
+@theme {
+  --color-primary-50: #ecfdf8;
+  --color-primary-100: #d1faee;
+  --color-primary-200: #a7f3de;
+  --color-primary-300: #6ee7c8;
+  --color-primary-400: #34d3ac;
+  --color-primary-500: #14b892;
+  --color-primary-600: #069478;
+  --color-primary-700: #067761;
+  --color-primary-800: #095e4f;
+  --color-primary-900: #0a4d42;
+
+  --color-secondary-50: #f0f6fb;
+  --color-secondary-100: #dceaf3;
+  --color-secondary-200: #c0d8ea;
+  --color-secondary-300: #94bddb;
+  --color-secondary-400: #619bc7;
+  --color-secondary-500: #3f7fb1;
+  --color-secondary-600: #2f6595;
+  --color-secondary-700: #285079;
+  --color-secondary-800: #254564;
+  --color-secondary-900: #163049;
+
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+
+  --color-ink: #12324a;
+  --color-ink-soft: #395b73;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f5f9fb;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Arial, sans-serif;
+
+  --radius-card: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Accesibilitate: focus states vizibile pentru navigare cu tastatura */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respectă preferința utilizatorului pentru reducerea mișcării */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Utilitar reutilizabil pentru text lung placeholder */
+.prose-legal :where(h2) {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-legal :where(h3) {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.prose-legal :where(p, ul, ol) {
+  color: var(--color-ink-soft);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.prose-legal :where(ul) {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.prose-legal :where(a) {
+  color: var(--color-primary-700);
+  text-decoration: underline;
+}

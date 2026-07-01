@@ -1,0 +1,53 @@
+---
+import LegalLayout from "@/layouts/LegalLayout.astro";
+import { site } from "@/data/site";
+---
+
+<LegalLayout
+  title="Politică cookies | North Dent"
+  description="Politica de cookies North Dent: ce sunt cookie-urile, ce categorii folosim și cum îți poți gestiona preferințele."
+  path="/politica-cookies/"
+  heading="Politică cookies"
+  lastUpdated="TODO: adaugă data"
+>
+  {/* TODO JURIDIC: text placeholder. Verificați cu un specialist înainte de publicare. */}
+  <p>
+    Acest site folosește cookie-uri pentru a funcționa corect și, doar cu
+    acordul tău, pentru analiză și marketing. Documentul nu constituie
+    consultanță juridică finală.
+  </p>
+
+  <h2>Ce sunt cookie-urile</h2>
+  <p>
+    Cookie-urile sunt fișiere mici stocate pe dispozitivul tău, care ajută
+    site-ul să funcționeze și să rețină preferințe.
+  </p>
+
+  <h2>Categorii de cookie-uri</h2>
+  <h3>Necesare</h3>
+  <p>
+    Esențiale pentru funcționarea site-ului și pentru salvarea preferințelor
+    tale de consimțământ. Sunt mereu active și nu pot fi dezactivate.
+  </p>
+  <h3>Analiză</h3>
+  <p>
+    Google Analytics, pentru a înțelege cum este folosit site-ul. Se încarcă
+    doar după consimțământul tău.
+  </p>
+  <h3>Marketing</h3>
+  <p>
+    Meta Pixel și TikTok Pixel, pentru măsurarea campaniilor. Se încarcă doar
+    după consimțământul tău.
+  </p>
+
+  <h2>Cum îți gestionezi preferințele</h2>
+  <p>
+    Îți poți schimba oricând alegerea folosind butonul „Setări cookies" din
+    subsolul site-ului. Poți gestiona cookie-urile și din setările browserului.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Pentru întrebări, scrie-ne la <a href={site.emailHref}>{site.email}</a>.
+  </p>
+</LegalLayout>

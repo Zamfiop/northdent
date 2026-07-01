@@ -1,0 +1,45 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ServiceGrid from "@/components/ServiceGrid.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import { services } from "@/data/services";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Servicii", path: "/servicii/" },
+];
+---
+
+<BaseLayout
+  title="Servicii stomatologice în Râmnicu Vâlcea | North Dent"
+  description="Servicii stomatologice North Dent în Râmnicu Vâlcea: igienizare, detartraj, Airflow, albire, tratament carii, endodonție, coroane, fațete, stomatologie copii și altele."
+  path="/servicii/"
+>
+  <section class="bg-gradient-to-b from-primary-50/60 to-white">
+    <Container class="py-10 sm:py-14">
+      <Breadcrumbs items={breadcrumbs} />
+      <h1 class="mt-5 text-3xl font-extrabold text-ink sm:text-4xl">
+        Servicii stomatologice în Râmnicu Vâlcea
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        De la igienizare și profilaxie până la estetică și lucrări dentare —
+        stabilim împreună planul potrivit pentru tine, după o consultație atentă.
+      </p>
+    </Container>
+  </section>
+
+  <section class="py-12">
+    <Container>
+      <SectionHeading title="Toate serviciile" />
+      <div class="mt-8">
+        <ServiceGrid services={services} columns={3} />
+      </div>
+    </Container>
+  </section>
+
+  <CtaSection />
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+import Icon from "@/components/Icon.astro";
+import { getServiceIcon } from "@/lib/icons";
+
+interface Props {
+  slug: string;
+  class?: string;
+}
+const { slug, class: className = "h-5 w-5" } = Astro.props;
+---
+
+<Icon name={getServiceIcon(slug)} class={className} />

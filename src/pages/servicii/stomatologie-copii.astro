@@ -1,0 +1,12 @@
+---
+import ServiceLayout from "@/layouts/ServiceLayout.astro";
+import { getService } from "@/data/services";
+
+// Fiecare serviciu are propriul fișier .astro pentru optimizare punctuală
+// ulterioară (text medical final se adaugă în slot-ul de mai jos).
+const service = getService("stomatologie-copii")!;
+---
+
+<ServiceLayout service={service}>
+  {/* TODO: adaugă aici conținut medical final, unic pentru această pagină. */}
+</ServiceLayout>

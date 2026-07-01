@@ -1,0 +1,35 @@
+---
+import JsonLd from "@/components/JsonLd.astro";
+import { breadcrumbSchema, type BreadcrumbEntry } from "@/lib/schema";
+
+interface Props {
+  items: BreadcrumbEntry[];
+}
+const { items } = Astro.props;
+// Prima intrare implicită "Acasă" dacă nu e deja prezentă.
+const entries: BreadcrumbEntry[] =
+  items[0]?.path === "/" ? items : [{ name: "Acasă", path: "/" }, ...items];
+---
+
+<nav aria-label="Breadcrumb" class="text-sm">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-ink-soft">
+    {
+      entries.map((item, index) => (
+        <li class="flex items-center gap-2">
+          {index > 0 && <span aria-hidden="true" class="text-secondary-300">/</span>}
+          {index < entries.length - 1 ? (
+            <a href={item.path} class="hover:text-primary-700">
+              {item.name}
+            </a>
+          ) : (
+            <span class="font-medium text-secondary-800" aria-current="page">
+              {item.name}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<JsonLd schema={breadcrumbSchema(entries)} />

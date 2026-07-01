@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap generat de @astrojs/sitemap
+Sitemap: https://northdent.ro/sitemap-index.xml

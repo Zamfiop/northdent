@@ -1,0 +1,39 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/Container.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import { blogPosts, type BlogPost } from "@/data/blog";
+import type { BreadcrumbEntry } from "@/lib/schema";
+
+// Rută dinamică pregătită tehnic. Momentan nu există articole => 0 pagini.
+export function getStaticPaths() {
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: BlogPost;
+}
+const { post } = Astro.props;
+const path = `/blog/${post.slug}/`;
+const breadcrumbs: BreadcrumbEntry[] = [
+  { name: "Acasă", path: "/" },
+  { name: "Articole utile", path: "/blog/" },
+  { name: post.title, path },
+];
+---
+
+<BaseLayout
+  title={`${post.title} | North Dent`}
+  description={post.description}
+  path={path}
+  ogType="article"
+>
+  <Container size="narrow" class="py-10 sm:py-14">
+    <Breadcrumbs items={breadcrumbs} />
+    <h1 class="mt-5 text-3xl font-extrabold text-ink sm:text-4xl">{post.title}</h1>
+    <article class="prose-legal mt-8" set:html={post.body} />
+  </Container>
+</BaseLayout>
