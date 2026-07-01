@@ -1,0 +1,13 @@
+---
+import { services } from "@/data/services";
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+return Astro.redirect(`/servicii/${slug}/`, 301);
+---

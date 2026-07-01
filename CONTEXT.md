@@ -182,6 +182,10 @@ Alias import: `@/` => `src/` (vezi `tsconfig.json`).
   mențiune CUANTIC DENT SRL, copyright.
 - **Blog**: pregătit tehnic (`/blog/` „în curând" + `/blog/[slug]`), **NEpromovat** în
   nav principal, exclus din sitemap. Articole în `src/data/blog.ts` (gol acum).
+- **Redirecturi legacy** (`public/_redirects` + `src/pages/en/`): URL-urile vechi
+  `/en/*` de pe site-ul anterior (ex. `/en/servicii/igienizare-profesionala`) fac
+  301 către echivalentul RO (`/servicii/igienizare-profesionala/`). Paginile `/en/`
+  sunt excluse din sitemap.
 - **Oferte / funnel** (`/oferta/<slug>/`): landing pages pentru reclame plătite, generate
   din `src/data/offers.ts` (rută `src/pages/oferta/[slug].astro` + `OfferLayout`). Sunt
   `noindex`, excluse din sitemap și nelegate în nav — accesibile doar prin link direct.
