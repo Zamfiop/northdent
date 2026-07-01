@@ -21,7 +21,8 @@ export type IconName =
   | "leaf"
   | "building2"
   | "users"
-  | "smartphone";
+  | "smartphone"
+  | "puzzle";
 
 export const icons: Record<IconName, string> = {
   stethoscope:
@@ -64,6 +65,8 @@ export const icons: Record<IconName, string> = {
     '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/>',
   smartphone:
     '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>',
+  puzzle:
+    '<path d="M15.39 4.39a1 1 0 0 0 1.68-.47 2.5 2.5 0 1 1 3.93 3.14 1 1 0 0 0-.47 1.68l1.87 1.86a2 2 0 0 1 0 2.83l-2.83 2.83a2 2 0 0 1-2.83 0l-1.86-1.87a1 1 0 0 0-1.68.47 2.5 2.5 0 0 1-3.94-3.13 1 1 0 0 0 .47-1.68l-1.87-1.86a2 2 0 0 1 0-2.83l2.83-2.83a2 2 0 0 1 2.83 0z"/>',
 };
 
 export const serviceIconBySlug: Record<string, IconName> = {
@@ -76,6 +79,7 @@ export const serviceIconBySlug: Record<string, IconName> = {
   "estetica-dentara": "smile",
   "albire-dentara": "sun",
   "fatete-dentare": "gem",
+  "lucrari-protetice": "puzzle",
   "coroane-dentare": "crown",
   "punti-dentare": "link",
   "stomatologie-copii": "baby",

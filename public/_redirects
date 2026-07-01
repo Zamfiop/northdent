@@ -1,2 +1,10 @@
 # Redirect www → canonical non-www (Cloudflare Pages)
 https://www.northdent.ro/* https://northdent.ro/:splat 301
+
+# Legacy English site (indexat de Google) → URL-uri canonice RO
+/en/servicii/* /servicii/:splat/ 301
+/en/servicii/*/ /servicii/:splat/ 301
+/en/servicii /servicii/ 301
+/en/servicii/ /servicii/ 301
+/en / 301
+/en/ / 301

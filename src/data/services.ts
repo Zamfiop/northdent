@@ -347,7 +347,7 @@ export const services: Service[] = [
           "Un dinte tratat endodontic devine mai fragil. O coroană îl protejează și îi reface rezistența pe termen lung.",
       },
     ],
-    related: ["tratament-carii", "coroane-dentare", "consultatie-stomatologica"],
+    related: ["tratament-carii", "lucrari-protetice", "consultatie-stomatologica"],
   },
   {
     slug: "estetica-dentara",
@@ -398,7 +398,7 @@ export const services: Service[] = [
           "Cu o consultație, în care evaluăm situația și stabilim ce opțiuni ți se potrivesc.",
       },
     ],
-    related: ["albire-dentara", "fatete-dentare", "coroane-dentare"],
+    related: ["albire-dentara", "fatete-dentare", "lucrari-protetice"],
   },
   {
     slug: "albire-dentara",
@@ -504,7 +504,58 @@ export const services: Service[] = [
           "Printr-o igienă corectă și controale periodice. Îți dăm recomandări concrete pentru a le păstra în stare bună.",
       },
     ],
-    related: ["estetica-dentara", "coroane-dentare", "albire-dentara"],
+    related: ["estetica-dentara", "lucrari-protetice", "albire-dentara"],
+  },
+  {
+    slug: "lucrari-protetice",
+    name: "Lucrări protetice",
+    h1: "Lucrări protetice în Râmnicu Vâlcea",
+    title: "Lucrări protetice în Râmnicu Vâlcea | North Dent",
+    description:
+      "Lucrări protetice la North Dent în Râmnicu Vâlcea: coroane, punți și proteze pentru refacerea dinților afectați sau lipsă. Plan personalizat după consultație.",
+    intro:
+      "Lucrările protetice refac forma, funcția și aspectul dinților afectați sau lipsă — de la coroane și punți până la proteze dentare.",
+    body: [
+      "Protetica dentară cuprinde soluțiile prin care restaurăm dinții deteriorați sau înlocuim dinții lipsă. Coroanele protejează un dinte slăbit sau tratat endodontic, punțile umplu spațiul lăsat de dinți lipsă alăturați, iar protezele dentare pot reda zâmbetul și masticația când lipsesc mai mulți dinți.",
+      "La North Dent, în Râmnicu Vâlcea, evaluăm situația ta și stabilim împreună ce lucrare protetică se potrivește — funcțional și estetic. Îți explicăm pașii, de la consultație și amprentă până la fixarea lucrării, fără grabă și cu decizii luate împreună.",
+    ],
+    cardSummary: "Coroane, punți și proteze pentru dinți refăcuți sau înlocuiți.",
+    featured: false,
+    whenRecommended: [
+      "După un tratament de canal sau când un dinte este slăbit",
+      "La dinți puternic deteriorați, fisurați sau cu carii extinse",
+      "Când lipsește unul sau mai mulți dinți și vrei să refaci zâmbetul",
+      "Pentru protecția și refacerea funcției masticatorii pe termen lung",
+    ],
+    howItWorks: [
+      "Evaluăm dinții și discutăm obiectivele tale",
+      "Stabilim tipul de lucrare protetică potrivit (coroană, punte sau proteză)",
+      "Pregătim dinții, luăm amprentele și realizăm lucrarea",
+      "Fixăm lucrarea, verificăm potrivirea și îți explicăm îngrijirea",
+    ],
+    whatToExpect: [
+      "Un plan clar, explicat pas cu pas",
+      "Lucrări adaptate nevoilor tale funcționale și estetice",
+      "Recomandări pentru îngrijire și controale periodice",
+    ],
+    faqs: [
+      {
+        question: "Ce sunt lucrările protetice?",
+        answer:
+          "Sunt soluțiile prin care refacem sau înlocuim dinții afectați — coroane, punți și proteze dentare. Tipul de lucrare se alege după consultație, în funcție de situația clinică.",
+      },
+      {
+        question: "Care este diferența între coroană, punte și proteză?",
+        answer:
+          "Coroana acoperă un singur dinte afectat. Puntea înlocuiește unul sau mai mulți dinți lipsă alăturați, sprijinită pe dinții vecini. Proteza dentară poate înlocui mai mulți dinți, inclusiv în zone nealăturate sau pe întreaga arcadă.",
+      },
+      {
+        question: "Câte ședințe sunt necesare pentru o lucrare protetică?",
+        answer:
+          "De obicei sunt necesare câteva ședințe, între pregătire, probă și fixare. Numărul exact și intervalele le stabilim după evaluarea inițială.",
+      },
+    ],
+    related: ["coroane-dentare", "punti-dentare", "proteze-dentare"],
   },
   {
     slug: "coroane-dentare",
@@ -555,7 +606,7 @@ export const services: Service[] = [
           "Cu o igienă corectă și controale periodice, o coroană poate rezista mulți ani. Durata depinde de îngrijire și de situația fiecărui pacient.",
       },
     ],
-    related: ["punti-dentare", "endodontie", "fatete-dentare"],
+    related: ["lucrari-protetice", "punti-dentare", "endodontie"],
   },
   {
     slug: "punti-dentare",
@@ -606,7 +657,7 @@ export const services: Service[] = [
           "Printr-o igienă atentă, inclusiv a zonei de sub punte, și prin controale periodice. Îți arătăm cum să o cureți corect.",
       },
     ],
-    related: ["coroane-dentare", "proteze-dentare", "consultatie-stomatologica"],
+    related: ["lucrari-protetice", "coroane-dentare", "proteze-dentare"],
   },
   {
     slug: "stomatologie-copii",
@@ -708,7 +759,7 @@ export const services: Service[] = [
           "Depinde de numărul dinților lipsă și de situația clinică. Stabilim împreună la consultație.",
       },
     ],
-    related: ["punti-dentare", "coroane-dentare", "consultatie-stomatologica"],
+    related: ["lucrari-protetice", "punti-dentare", "consultatie-stomatologica"],
   },
   {
     slug: "gutiere-bruxism",

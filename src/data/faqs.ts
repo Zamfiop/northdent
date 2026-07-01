@@ -233,7 +233,7 @@ export const generalFaqCategories: FaqCategory[] = [
       {
         question: "Ce servicii stomatologice oferă North Dent?",
         answer:
-          "Oferim consultații stomatologice, igienizare profesională, detartraj, Airflow, tratament al cariilor, endodonție (tratament de canal), estetică dentară, albire dentară, fațete, coroane, punți, stomatologie pentru copii, proteze dentare și gutiere pentru bruxism. Lista completă este pe pagina Servicii.",
+          "Oferim consultații stomatologice, igienizare profesională, detartraj, Airflow, tratament al cariilor, endodonție (tratament de canal), estetică dentară, albire dentară, fațete, lucrări protetice (coroane, punți, proteze), stomatologie pentru copii și gutiere pentru bruxism. Lista completă este pe pagina Servicii.",
       },
       {
         question: "Faceți implanturi dentare sau aparat dentar (ortodonție)?",
@@ -269,6 +269,11 @@ export const generalFaqCategories: FaqCategory[] = [
         question: "Ce sunt fațetele dentare și pentru cine sunt potrivite?",
         answer:
           "Fațetele sunt lucrări subțiri aplicate pe fața vizibilă a dinților frontali, pentru a îmbunătăți forma, culoarea sau alinierea ușoară. Sunt o opțiune de estetică dentară, nu o soluție universală — discutăm în consultație dacă se potrivesc situației tale și ce alternative există.",
+      },
+      {
+        question: "Ce sunt lucrările protetice și ce include protetica dentară?",
+        answer:
+          "Lucrările protetice refac sau înlocuiesc dinții afectați sau lipsă. La North Dent includ coroane dentare (pentru dinți slăbiți sau tratați endodontic), punți dentare (pentru dinți lipsă alăturați) și proteze dentare (parțiale sau totale). Tipul de lucrare se stabilește după consultație, în funcție de situația clinică și de obiectivele tale.",
       },
       {
         question: "Când am nevoie de o coroană dentară sau de o punte?",

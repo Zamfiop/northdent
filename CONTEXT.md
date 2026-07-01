@@ -76,13 +76,14 @@ profesionist. Public: adulți, copii, familii, **pacienți anxioși**.
 
 ## 5. Servicii (sursă: `src/data/services.ts`)
 
-14 servicii, fiecare cu pagină proprie `.astro` în `src/pages/servicii/<slug>.astro`
+15 servicii, fiecare cu pagină proprie `.astro` în `src/pages/servicii/<slug>.astro`
 (fișier subțire care apelează `getService("<slug>")` și randează `ServiceLayout`;
 slot liber pentru text final per pagină):
 
 consultatie-stomatologica, igienizare-profesionala, detartraj, airflow,
 tratament-carii, endodontie, estetica-dentara, albire-dentara, fatete-dentare,
-coroane-dentare, punti-dentare, stomatologie-copii, proteze-dentare, gutiere-bruxism.
+lucrari-protetice, coroane-dentare, punti-dentare, stomatologie-copii,
+proteze-dentare, gutiere-bruxism.
 
 **NU EXISTĂ și NU se creează** pagini pentru: **implant dentar**, **ortodonție**,
 **prețuri**. (Cazurile chirurgicale/ortodontice se pot menționa discret în FAQ ca
