@@ -35,6 +35,11 @@ export interface Service {
   faqs: ServiceFaq[];
   /** Sluguri de servicii conexe pentru internal linking */
   related: string[];
+  /** Imagine opțională în hero (dreapta pe desktop). Dacă lipsește, hero-ul rămâne doar text. */
+  image?: {
+    src: string;
+    alt: string;
+  };
 }
 
 export const services: Service[] = [
@@ -445,6 +450,10 @@ export const services: Service[] = [
       },
     ],
     related: ["airflow", "estetica-dentara", "igienizare-profesionala"],
+    image: {
+      src: "/images/galerie/albire-profesionala-valcea.webp",
+      alt: "Albire dentară profesională la North Dent, Râmnicu Vâlcea",
+    },
   },
   {
     slug: "fatete-dentare",

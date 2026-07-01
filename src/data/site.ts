@@ -59,7 +59,7 @@ export const site = {
 
   // Adresă — diacritice aliniate cu conținutul site-ului și GBP
   address: {
-    streetAddress: "Str. Henri Coandă Nr.40, Bl.N14, Sc.A, Ap.1",
+    streetAddress: "Str. Henri Coandă Nr.40, Bl.N14, Sc.A",
     addressLocality: "Râmnicu Vâlcea",
     addressRegion: "Vâlcea",
     postalCode: "",

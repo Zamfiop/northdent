@@ -44,7 +44,7 @@ npm run preview
 
 - Brand: **North Dent** · Firmă: **CUANTIC DENT SRL**
 - Medic: **Dr. Zamfirescu Laura-Maria** — titlu: **Medic stomatolog** (NU inventa alte specializări/certificări/ani de experiență)
-- Adresă: **Str. Henri Coanda Nr.40, Bl.N14, Sc.A, Ap.1, Ramnicu Valcea** (zona Nord)
+- Adresă: **Str. Henri Coanda Nr.40, Bl.N14, Sc.A, Ramnicu Valcea** (zona Nord)
 - Telefon / WhatsApp: **0747 384 848** → `tel:+40747384848`
 - WhatsApp: `https://wa.me/40747384848`
 - Email: **contact@northdent.ro** → `mailto:contact@northdent.ro`
