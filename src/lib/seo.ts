@@ -7,6 +7,8 @@ export interface SeoInput {
   path: string;
   /** Imagine Open Graph absolută sau relativă */
   image?: string;
+  /** Alt text pentru og:image (implicit: site.ogImage.alt) */
+  imageAlt?: string;
   /** Tip Open Graph */
   ogType?: "website" | "article";
   /** true => noindex,nofollow (implicit paginile publice sunt indexabile) */
@@ -18,6 +20,7 @@ export interface ResolvedSeo {
   description: string;
   canonical: string;
   image: string;
+  imageAlt: string;
   ogType: "website" | "article";
   robots: string;
   locale: string;
@@ -39,6 +42,7 @@ export function resolveSeo(input: SeoInput): ResolvedSeo {
     description: input.description,
     canonical: absoluteUrl(input.path),
     image: image.startsWith("http") ? image : absoluteUrl(image),
+    imageAlt: input.imageAlt ?? site.ogImage.alt,
     ogType: input.ogType ?? "website",
     robots: input.noindex ? "noindex,nofollow" : "index,follow",
     locale: "ro_RO",

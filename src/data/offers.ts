@@ -9,6 +9,8 @@
 //  - `deadline` este o dată ISO cu fus orar (RO vară = +03:00). Timer-ul
 //    numără până la această dată; după expirare, CTA rămâne activ.
 
+import { site } from "@/data/site";
+
 export interface OfferInclude {
   title: string;
   description: string;
@@ -251,3 +253,19 @@ export function getOffer(slug: string): Offer | undefined {
 
 /** Toate slug-urile pentru getStaticPaths. */
 export const offerSlugs: string[] = offers.map((o) => o.slug);
+
+/** Imagine OG pentru share/preview — aceeași logică ca hero-ul vizibil pe pagină. */
+export function getOfferOgImage(offer: Offer): string {
+  const hero = offer.hero;
+  if (hero?.type === "beforeAfter" && hero.ready) return hero.after;
+  if (hero?.type === "image" && hero.ready !== false) return hero.src;
+  return site.doctor.photo;
+}
+
+/** Alt text pentru og:image (potrivit imaginii alese mai sus). */
+export function getOfferOgImageAlt(offer: Offer): string {
+  const hero = offer.hero;
+  if (hero?.type === "beforeAfter" && hero.ready) return hero.afterAlt;
+  if (hero?.type === "image" && hero.ready !== false) return hero.alt;
+  return site.doctor.photoAlt;
+}
