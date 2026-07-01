@@ -1,14 +1,24 @@
 # Imagini North Dent
 
-Adaugă aici imaginile reale ale site-ului. Fișiere așteptate (placeholder în cod):
+## Logo (`logo/`)
+- `logo-wide.svg`, `logo-wide-white.svg`, `logo-square.svg`, `logo-square-white.svg`
 
-- `logo/` — logo-uri SVG: `logo-wide.svg`, `logo-wide-white.svg`, `logo-square.svg`, `logo-square-white.svg` (vezi `src/data/site.ts`)
-- `og-default.webp` — imagine Open Graph la share (1200×630), vezi `site.ogImage`
-- `galerie/cabinet-stomatologic.webp` — poză cabinet (homepage Hero + galerie)
-- `galerie/cabinet-exterior.jpg`
-- `galerie/receptie.jpg`
-- `galerie/sala-tratament.jpg`
-- `galerie/detalii-cabinet.jpg`
-- `galerie/dr-laura-maria-zamfirescu-dentist-valcea.webp` — poză medic
+## Open Graph
+- `og-default.webp` — share image (1200×630), vezi `site.ogImage`
 
-TODO: optimizează imaginile (dimensiuni corecte, format modern) înainte de publicare.
+## Galerie (`galerie/`)
+Sursa de adevăr pentru lista afișată: `src/data/gallery.ts`.
+
+| Fișier | Folosit în |
+|--------|------------|
+| `cabinet-stomatologic.webp` | Homepage Hero, galerie |
+| `dr-laura-maria-zamfirescu-dentist-valcea.webp` | Medic, DoctorCard, galerie |
+| `dentist-valcea-cabinet.webp` | Galerie |
+| `cabinet-stomatologic-valcea-pacient-informat.webp` | Galerie |
+| `cabinet-stomatologic-valcea-detartraj.webp` | Galerie |
+| `albire-profesionala-valcea.webp` | Galerie |
+| `cabinet-stomatologic-radiografie.webp` | Galerie |
+| `radiografie-cabinet-stomatologic.webp` | Galerie |
+| `interpretare-radiografie-dentist-valcea.webp` | Galerie |
+
+La adăugarea unei imagini noi: pune fișierul în `galerie/`, apoi adaugă intrarea în `src/data/gallery.ts` cu `alt` descriptiv și local (Râmnicu Vâlcea).

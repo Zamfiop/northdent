@@ -41,16 +41,15 @@ export const generalFaqs: Faq[] = [
   {
     question: "Cât costă o consultație?",
     answer:
-      "Prețurile se discută în funcție de nevoile fiecărui pacient. Scrie-ne pe WhatsApp pentru detalii. TODO: adaugă informații de preț dacă se dorește.",
+      "Prețurile sunt transparente: avem o listă de prețuri afișată în cabinet. Înainte de orice intervenție îți comunicăm costul estimat și stabilim împreună planul. Pentru o estimare personalizată, scrie-ne pe WhatsApp.",
   },
   {
     question: "Care este programul cabinetului?",
     answer:
-      "Momentan suntem deschiși de luni până vineri, între 10:00 și 18:00. Programul este temporar și se poate schimba.",
+      "Suntem deschiși de luni până joi, între 14:00 și 19:00. Vineri, sâmbătă și duminică suntem închisi.",
   },
   {
     question: "Pot plăti cu cardul?",
-    answer:
-      "TODO: confirmă metodele de plată acceptate (numerar, card etc.).",
+    answer: "Da. Acceptăm atât numerar, cât și plata cu cardul.",
   },
 ];

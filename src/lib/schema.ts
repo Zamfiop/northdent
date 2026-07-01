@@ -15,13 +15,17 @@ const orgId = `${site.url}/#organization`;
 const websiteId = `${site.url}/#website`;
 
 function postalAddress(): JsonLdObject {
-  return {
+  const address: JsonLdObject = {
     "@type": "PostalAddress",
     streetAddress: site.address.streetAddress,
     addressLocality: site.address.addressLocality,
     addressRegion: site.address.addressRegion,
     addressCountry: site.address.addressCountry,
   };
+  if (site.address.postalCode) {
+    address.postalCode = site.address.postalCode;
+  }
+  return address;
 }
 
 function openingHoursSpecification(): JsonLdObject[] {
@@ -55,6 +59,11 @@ export function dentistSchema(): JsonLdObject {
     },
     medicalSpecialty: "Dentistry",
     openingHoursSpecification: openingHoursSpecification(),
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: site.geo.latitude,
+      longitude: site.geo.longitude,
+    },
     sameAs: site.sameAs,
     hasMap: site.mapsUrl,
   };
@@ -97,8 +106,8 @@ export function personSchema(): JsonLdObject {
     name: site.doctor.name,
     jobTitle: site.doctor.title,
     url: absoluteUrl(`/${site.doctor.slug}/`),
+    image: absoluteUrl(site.doctor.photo),
     worksFor: { "@id": businessId },
-    // TODO: adaugă image, alumniOf sau credențiale DOAR dacă sunt confirmate.
   };
 }
 

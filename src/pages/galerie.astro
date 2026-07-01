@@ -4,55 +4,18 @@ import Container from "@/components/Container.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import CtaSection from "@/components/CtaSection.astro";
 import { site } from "@/data/site";
+import { galleryImages } from "@/data/gallery";
 import type { BreadcrumbEntry } from "@/lib/schema";
 
 const breadcrumbs: BreadcrumbEntry[] = [
   { name: "Acasă", path: "/" },
   { name: "Galerie", path: "/galerie/" },
 ];
-
-// `ready: true` => imagine reală disponibilă (randăm <img>). Altfel placeholder.
-// TODO: adaugă fotografiile reale în /public/images/galerie/ și marchează `ready: true`.
-// `alt` este optimizat pentru SEO local — păstrează formulările descriptive.
-const gallery: { src: string; alt: string; label: string; ready?: boolean }[] = [
-  {
-    src: site.cabinet.photo,
-    alt: site.cabinet.photoAlt,
-    label: "Cabinet stomatologic",
-    ready: true,
-  },
-  {
-    src: "/images/galerie/cabinet-exterior.jpg",
-    alt: "Exterior cabinet stomatologic North Dent în Râmnicu Vâlcea",
-    label: "Cabinet — exterior",
-  },
-  {
-    src: "/images/galerie/receptie.jpg",
-    alt: "Recepția cabinetului North Dent Râmnicu Vâlcea",
-    label: "Recepție",
-  },
-  {
-    src: "/images/galerie/sala-tratament.jpg",
-    alt: "Sală de tratament North Dent Râmnicu Vâlcea",
-    label: "Sală de tratament",
-  },
-  {
-    src: "/images/galerie/detalii-cabinet.jpg",
-    alt: "Detalii din cabinetul stomatologic North Dent Râmnicu Vâlcea",
-    label: "Detalii cabinet",
-  },
-  {
-    src: site.doctor.photo,
-    alt: "Dr. Zamfirescu Laura-Maria medic stomatolog Râmnicu Vâlcea",
-    label: "Dr. Zamfirescu Laura-Maria",
-    ready: true,
-  },
-];
 ---
 
 <BaseLayout
   title="Galerie foto cabinet North Dent | Râmnicu Vâlcea"
-  description="Galerie foto North Dent: cabinetul nostru stomatologic din Zona Nord a orașului Râmnicu Vâlcea — recepție, sală de tratament și detalii."
+  description="Galerie foto North Dent — cabinet stomatologic din Zona Nord, Râmnicu Vâlcea. Imagini din spațiul de tratament, echipament și echipa medicală."
   path="/galerie/"
 >
   <section class="bg-gradient-to-b from-primary-50/60 to-white">
@@ -62,8 +25,8 @@ const gallery: { src: string; alt: string; label: string; ready?: boolean }[] = 
         Galerie foto
       </h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
-        Câteva imagini din cabinetul North Dent din {site.address.areaLabel}.
-        Mai adăugăm treptat fotografii din recepție, sală de tratament și alte spații.
+        Imagini din cabinetul North Dent din {site.address.areaLabel} — spații de
+        tratament, echipament și echipa care te întâmpină la fiecare vizită.
       </p>
     </Container>
   </section>
@@ -72,25 +35,17 @@ const gallery: { src: string; alt: string; label: string; ready?: boolean }[] = 
     <Container>
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
-          gallery.map((item) => (
+          galleryImages.map((item) => (
             <figure class="overflow-hidden rounded-2xl border border-secondary-100 bg-white shadow-sm">
-              {item.ready ? (
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  loading="lazy"
-                  decoding="async"
-                  class="aspect-[4/3] w-full object-cover"
-                />
-              ) : (
-                <div
-                  class="flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-br from-primary-100 to-secondary-100 text-center"
-                  role="img"
-                  aria-label={item.alt}
-                >
-                  <span class="px-4 text-sm text-secondary-500">{item.label}</span>
-                </div>
-              )}
+              <img
+                src={item.src}
+                alt={item.alt}
+                width="800"
+                height="600"
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/3] w-full object-cover"
+              />
               <figcaption class="p-3 text-sm text-ink-soft">{item.alt}</figcaption>
             </figure>
           ))

@@ -40,12 +40,6 @@ const globalSchema = includeBusinessSchema
     {/* TODO: generează un set complet de favicon (favicon.ico, apple-touch-icon.png)
         și adaugă-l în /public/favicon/. Vezi și /public/images/ pentru og-default.jpg. */}
     <meta name="theme-color" content="#069478" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
     <SeoHead {...seo} />
     {globalSchema.length > 0 && <JsonLd schema={globalSchema} />}
     {jsonLd && <JsonLd schema={jsonLd} />}

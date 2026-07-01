@@ -1,0 +1,2 @@
+# Redirect www → canonical non-www (Cloudflare Pages)
+https://www.northdent.ro/* https://northdent.ro/:splat 301

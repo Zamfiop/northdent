@@ -18,13 +18,12 @@ export interface OpeningHour {
   closes: string | null;
 }
 
-// TODO: Programul este TEMPORAR și se va schimba curând. Actualizează aici.
 export const openingHours: OpeningHour[] = [
-  { dayOfWeek: "Monday", label: "Luni", opens: "10:00", closes: "18:00" },
-  { dayOfWeek: "Tuesday", label: "Marți", opens: "10:00", closes: "18:00" },
-  { dayOfWeek: "Wednesday", label: "Miercuri", opens: "10:00", closes: "18:00" },
-  { dayOfWeek: "Thursday", label: "Joi", opens: "10:00", closes: "18:00" },
-  { dayOfWeek: "Friday", label: "Vineri", opens: "10:00", closes: "18:00" },
+  { dayOfWeek: "Monday", label: "Luni", opens: "14:00", closes: "19:00" },
+  { dayOfWeek: "Tuesday", label: "Marți", opens: "14:00", closes: "19:00" },
+  { dayOfWeek: "Wednesday", label: "Miercuri", opens: "14:00", closes: "19:00" },
+  { dayOfWeek: "Thursday", label: "Joi", opens: "14:00", closes: "19:00" },
+  { dayOfWeek: "Friday", label: "Vineri", opens: null, closes: null },
   { dayOfWeek: "Saturday", label: "Sâmbătă", opens: null, closes: null },
   { dayOfWeek: "Sunday", label: "Duminică", opens: null, closes: null },
 ];
@@ -58,16 +57,22 @@ export const site = {
   email: "contact@northdent.ro",
   emailHref: "mailto:contact@northdent.ro",
 
-  // Adresă
+  // Adresă — diacritice aliniate cu conținutul site-ului și GBP
   address: {
-    streetAddress: "Str. Henri Coanda Nr.40, Bl.N14, Sc.A, Ap.1",
-    addressLocality: "Ramnicu Valcea",
+    streetAddress: "Str. Henri Coandă Nr.40, Bl.N14, Sc.A, Ap.1",
+    addressLocality: "Râmnicu Vâlcea",
     addressRegion: "Vâlcea",
     postalCode: "",
     addressCountry: "RO",
     areaLabel: "Zona Nord, Râmnicu Vâlcea",
   },
   areaServed: "Râmnicu Vâlcea",
+
+  // Coordonate din Google Maps (pentru schema JSON-LD)
+  geo: {
+    latitude: 45.113685,
+    longitude: 24.372782,
+  },
 
   // Hărți / Google Business Profile
   mapsUrl: "https://maps.app.goo.gl/xTokLoemcPu3EQgP7",

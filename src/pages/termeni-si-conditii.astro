@@ -8,45 +8,137 @@ import { site } from "@/data/site";
   description="Termenii și condițiile de utilizare a site-ului North Dent."
   path="/termeni-si-conditii/"
   heading="Termeni și condiții"
-  lastUpdated="TODO: adaugă data"
+  lastUpdated="01.07.2026"
 >
-  {/* TODO JURIDIC: text placeholder. Verificați cu un specialist înainte de publicare. */}
   <p>
-    Prin utilizarea site-ului {site.url} ești de acord cu termenii de mai jos.
-    Documentul nu constituie consultanță juridică finală și trebuie verificat de
-    un specialist înainte de publicare.
+    Prezentii termeni și condiții reglementează utilizarea site-ului {site.url}.
+    Prin accesarea și navigarea pe site, confirmi că ai citit și înțeles
+    prevederile de mai jos. Dacă nu ești de acord, te rugăm să nu utilizezi
+    site-ul.
   </p>
 
-  <h2>Despre site</h2>
+  <h2>Operatorul site-ului</h2>
   <p>
-    Site-ul este administrat de {site.legalName} și oferă informații despre
-    serviciile cabinetului stomatologic {site.brand}.
+    Site-ul este administrat de <strong>{site.legalName}</strong>, care operează
+    cabinetul stomatologic {site.brand}, cu sediul de lucru la adresa{" "}
+    {site.address.streetAddress}, {site.address.addressLocality}, județul{" "}
+    {site.address.addressRegion}, România.
+  </p>
+  <p>
+    Contact: <a href={site.emailHref}>{site.email}</a>, telefon{" "}
+    {site.phoneDisplay}, WhatsApp disponibil pe site.
   </p>
 
-  <h2>Conținut informativ</h2>
+  <h2>Scopul site-ului</h2>
   <p>
-    Informațiile de pe site au caracter general și informativ și nu înlocuiesc
-    o consultație de specialitate. Planul de tratament se stabilește după o
-    consultație în cabinet.
+    Site-ul are rol informativ și de prezentare a serviciilor cabinetului
+    stomatologic {site.brand}. Scopul principal este să oferim informații despre
+    servicii, locație, program și modalități de contact, inclusiv programarea
+    pe WhatsApp.
+  </p>
+
+  <h2>Conținut informativ — nu înlocuiește consultația medicală</h2>
+  <p>
+    Informațiile publicate pe site au caracter general și informativ. Ele{" "}
+    <strong>nu constituie sfat medical, diagnostic sau recomandare de
+    tratament</strong> și nu înlocuiesc o consultație de specialitate în
+    cabinet.
+  </p>
+  <p>
+    Planul de tratament, costurile estimate și deciziile medicale se stabilesc
+    exclusiv după o evaluare în cabinet, în urma discuției cu medicul. Înainte
+    de orice intervenție, pacienților li se comunică costul estimat.
   </p>
 
   <h2>Programări</h2>
   <p>
-    Programările se pot face pe WhatsApp, telefonic sau prin email. TODO
-    JURIDIC: detaliază politica de programare/anulare dacă este cazul.
+    Programările se pot face prin WhatsApp, telefon sau email, în funcție de
+    disponibilitatea cabinetului. Programul de lucru este afișat pe site și poate
+    fi actualizat periodic.
   </p>
+  <p>
+    Te rugăm să anunți din timp dacă nu poți ajunge la programare, prin același
+    canal prin care ai solicitat intervalul (WhatsApp, telefon sau email), pentru
+    a putea oferi locul altui pacient. Ne rezervăm dreptul de a reprograma sau
+    de a refuza programări în situații excepționale (forță majoră, indisponibilitate
+    medicală etc.), cu comunicare în prealabil acolo unde este posibil.
+  </p>
+
+  <h2>Prețuri și plată</h2>
+  <p>
+    Prețurile sunt transparente: în cabinet este afișată o listă de prețuri.
+    Costul unui tratament este comunicat pacientului înainte de începerea
+    lucrărilor. Acceptăm plata în numerar și cu cardul, în condițiile comunicate
+    la cabinet.
+  </p>
+
+  <h2>Utilizarea corectă a site-ului</h2>
+  <p>Te angajezi să nu:</p>
+  <ul>
+    <li>utilizezi site-ul în moduri care îi afectează funcționarea sau securitatea;</li>
+    <li>încerci acces neautorizat la sisteme sau date;</li>
+    <li>reproduci, distribui sau exploatezi conținutul site-ului fără acordul nostru scris, în afara uzului personal informativ.</li>
+  </ul>
 
   <h2>Proprietate intelectuală</h2>
   <p>
-    Conținutul site-ului (texte, imagini, siglă) aparține {site.legalName} sau
-    este folosit cu acordul deținătorilor de drepturi.
+    Conținutul site-ului (texte, imagini, siglă, elemente grafice, structură)
+    aparține {site.legalName} sau este folosit cu acordul deținătorilor de
+    drepturi și este protejat de legislația privind drepturile de autor și
+    proprietatea intelectuală. Este interzisă copierea sau reutilizarea fără
+    permisiune, cu excepția citării scurte cu menționarea sursei și a linkului
+    către site.
+  </p>
+
+  <h2>Linkuri către site-uri terțe</h2>
+  <p>
+    Site-ul poate conține linkuri către servicii terțe (ex. Google Maps,
+    WhatsApp). Nu suntem responsabili pentru conținutul sau politicile de
+    confidențialitate ale acelor site-uri. Te încurajăm să le consulți separat.
   </p>
 
   <h2>Limitarea răspunderii</h2>
-  <p>TODO JURIDIC: adaugă clauze de limitare a răspunderii verificate juridic.</p>
+  <p>
+    Depunem eforturi rezonabile pentru a menține informațiile de pe site corecte
+    și actualizate, însă nu garantăm că toate informațiile sunt complete,
+    actuale sau lipsite de erori în orice moment.
+  </p>
+  <p>
+    În măsura permisă de lege, {site.legalName} nu răspunde pentru daune directe
+    sau indirecte rezultate din utilizarea site-ului, din imposibilitatea de a-l
+    accesa, din întârzieri în răspuns la mesaje sau din decizii luate exclusiv
+    pe baza informațiilor de pe site, fără consultație medicală în cabinet.
+  </p>
+  <p>
+    Nimic din acești termeni nu limitează drepturile tale legale ca pacient sau
+    consumator, acolo unde legea nu permite o astfel de limitare.
+  </p>
+
+  <h2>Protecția datelor personale</h2>
+  <p>
+    Prelucrarea datelor cu caracter personal este descrisă în{" "}
+    <a href="/politica-de-confidentialitate/">Politica de confidențialitate</a>{" "}
+    și în <a href="/politica-cookies/">Politica cookies</a>.
+  </p>
+
+  <h2>Modificări</h2>
+  <p>
+    Putem actualiza acești termeni pentru a reflecta schimbări legislative,
+    operaționale sau tehnice. Versiunea actualizată este publicată pe această
+    pagină, cu data ultimei modificări. Continuarea utilizării site-ului după
+    publicarea modificărilor constituie acceptarea noilor termeni.
+  </p>
+
+  <h2>Legea aplicabilă și litigii</h2>
+  <p>
+    Prezentii termeni sunt guvernați de legea română. Orice litigiu decurgând
+    din utilizarea site-ului va fi soluționat de instanțele competente din
+    România, cu respectarea drepturilor obligatorii ale consumatorilor.
+  </p>
 
   <h2>Contact</h2>
   <p>
-    Pentru întrebări, scrie-ne la <a href={site.emailHref}>{site.email}</a>.
+    Pentru întrebări legate de acești termeni, scrie-ne la{" "}
+    <a href={site.emailHref}>{site.email}</a> sau sună la {site.phoneDisplay}.
   </p>
 </LegalLayout>

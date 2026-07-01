@@ -8,54 +8,180 @@ import { site } from "@/data/site";
   description="Politica de confidențialitate North Dent: cum colectăm, folosim și protejăm datele cu caracter personal."
   path="/politica-de-confidentialitate/"
   heading="Politică de confidențialitate"
-  lastUpdated="TODO: adaugă data"
+  lastUpdated="01.07.2026"
 >
-  {/* TODO JURIDIC: text placeholder. Verificați cu un specialist înainte de publicare. */}
   <p>
     Această politică descrie modul în care {site.brand} ({site.legalName})
     colectează și prelucrează datele cu caracter personal ale vizitatorilor
-    site-ului {site.url}. Documentul nu constituie consultanță juridică finală
-    și trebuie verificat de un specialist înainte de publicare.
+    site-ului {site.url} și ale persoanelor care ne contactează pentru
+    programări sau informații.
   </p>
 
   <h2>Operatorul de date</h2>
   <p>
-    {site.legalName}, cu punct de lucru la adresa {site.address.streetAddress},
-    {site.address.addressLocality}. Ne poți contacta la
-    <a href={site.emailHref}>{site.email}</a> sau la telefon {site.phoneDisplay}.
+    Operatorul datelor cu caracter personal este <strong>{site.legalName}</strong>,
+    care operează cabinetul stomatologic {site.brand}, cu punct de lucru la
+    adresa {site.address.streetAddress}, {site.address.addressLocality},
+    județul {site.address.addressRegion}, România.
+  </p>
+  <p>
+    Ne poți contacta la <a href={site.emailHref}>{site.email}</a>, la telefon{" "}
+    {site.phoneDisplay} sau prin WhatsApp pentru orice întrebare legată de
+    protecția datelor tale.
   </p>
 
   <h2>Ce date colectăm</h2>
+  <p>În funcție de modul în care interacționezi cu noi, putem prelucra:</p>
   <ul>
-    <li>Date de contact pe care ni le transmiți voluntar (ex. prin WhatsApp, telefon sau email).</li>
-    <li>Date tehnice și de utilizare colectate prin cookie-uri, doar cu consimțământul tău. TODO: detaliază.</li>
+    <li>
+      <strong>Date de identificare și contact</strong> pe care ni le transmiți
+      voluntar (nume, număr de telefon, adresă de email, mesaje trimise prin
+      WhatsApp, telefon sau email).
+    </li>
+    <li>
+      <strong>Date privind programările</strong> (intervalul solicitat, preferințe
+      de comunicare, alte detalii pe care ni le comunici pentru organizarea
+      vizitei).
+    </li>
+    <li>
+      <strong>Date tehnice</strong> generate la navigarea pe site (adresă IP,
+      tip browser, dispozitiv, pagini vizitate, data și ora accesului), colectate
+      prin cookie-uri sau tehnologii similare <strong>doar dacă îți dai
+      consimțământul</strong> pentru categoriile Analiză sau Marketing.
+    </li>
+    <li>
+      <strong>Preferințele tale privind cookie-urile</strong>, salvate local în
+      browser (cheie <code>northdent_consent_v1</code>), necesare pentru a
+      respecta alegerea ta.
+    </li>
   </ul>
+  <p>
+    Prin acest site <strong>nu solicităm și nu colectăm în mod activ date
+    medicale sensibile</strong>. Datele de sănătate se pot prelucra separat, în
+    cadrul relației medicale din cabinet, conform legislației aplicabile
+    domeniului medical.
+  </p>
 
   <h2>Scopurile prelucrării</h2>
   <ul>
-    <li>Programarea și comunicarea cu pacienții.</li>
-    <li>Îmbunătățirea site-ului și măsurarea audienței (doar cu acord).</li>
+    <li>Răspuns la solicitări de informații și organizarea programărilor.</li>
+    <li>Comunicarea cu pacienții și potențialii pacienți.</li>
+    <li>Îndeplinirea obligațiilor legale care ne revin ca furnizor de servicii medicale.</li>
+    <li>Îmbunătățirea site-ului și măsurarea audienței (doar cu consimțământ pentru Analiză).</li>
+    <li>Măsurarea eficienței comunicărilor online (doar cu consimțământ pentru Marketing).</li>
+    <li>Asigurarea securității și funcționării corecte a site-ului.</li>
   </ul>
 
   <h2>Temeiul legal</h2>
-  <p>TODO JURIDIC: precizează temeiurile (consimțământ, interes legitim, obligație legală etc.).</p>
+  <p>Prelucrăm datele tale pe baza următoarelor temeiuri, în sensul GDPR:</p>
+  <ul>
+    <li>
+      <strong>Executarea unei cereri sau a unui contract</strong> — pentru
+      programări, comunicare și prestarea serviciilor stomatologice.
+    </li>
+    <li>
+      <strong>Interes legitim</strong> — pentru răspuns la solicitări, securitatea
+      site-ului și apărarea drepturilor noastre, în măsura în care interesul
+      nostru nu prevalează drepturilor tale fundamentale.
+    </li>
+    <li>
+      <strong>Consimțământ</strong> — pentru cookie-urile și tehnologiile de
+      analiză și marketing, precum și pentru comunicări opționale, acolo unde
+      este cazul.
+    </li>
+    <li>
+      <strong>Obligație legală</strong> — pentru evidențele și documentele cerute
+      de legislația medicală, fiscală sau de altă natură aplicabilă.
+    </li>
+  </ul>
+
+  <h2>Destinatarii datelor</h2>
+  <p>
+    Datele pot fi accesate de personalul autorizat al {site.legalName}. Putem
+    apela la furnizori de servicii (găzduire web, instrumente de analiză sau
+    publicitate online) care acționează ca persoane împuternicite, <strong>doar
+    în măsura în care ai acceptat categoriile relevante de cookie-uri</strong> sau
+    când este necesar pentru funcționarea site-ului.
+  </p>
+  <p>Furnizori terți menționați în politica de cookies, cu acordul tău:</p>
+  <ul>
+    <li>Google Analytics (Google Ireland Limited)</li>
+    <li>Meta Pixel (Meta Platforms Ireland Limited)</li>
+    <li>TikTok Pixel (TikTok Technology Limited)</li>
+  </ul>
+  <p>
+    Nu vindem datele tale personale. Nu transmitem date medicale sensibile
+    către acești furnizori prin intermediul site-ului.
+  </p>
+
+  <h2>Perioada de stocare</h2>
+  <ul>
+    <li>
+      Datele din corespondența pentru programări se păstrează cât timp este
+      necesar pentru organizarea vizitei și, ulterior, conform obligațiilor legale
+      din relația medicală.
+    </li>
+    <li>
+      Datele tehnice colectate prin cookie-uri se păstrează conform politicilor
+      furnizorilor respectivi și atât timp cât consimțământul tău este activ.
+    </li>
+    <li>
+      Preferințele de consimțământ sunt păstrate în browser până la ștergerea
+      manuală sau până la o nouă decizie din panoul de setări cookies.
+    </li>
+  </ul>
 
   <h2>Drepturile tale (GDPR)</h2>
+  <p>În condițiile legii, ai următoarele drepturi:</p>
+  <ul>
+    <li>dreptul de acces la datele tale;</li>
+    <li>dreptul la rectificare;</li>
+    <li>dreptul la ștergere („dreptul de a fi uitat”), în limitele legii;</li>
+    <li>dreptul la restricționarea prelucrării;</li>
+    <li>dreptul la portabilitatea datelor, acolo unde este aplicabil;</li>
+    <li>dreptul de opoziție la anumite prelucrări bazate pe interes legitim;</li>
+    <li>
+      dreptul de a-ți retrage consimțământul în orice moment, fără a afecta
+      legalitatea prelucrării efectuate înainte de retragere.
+    </li>
+  </ul>
   <p>
-    Ai dreptul de acces, rectificare, ștergere, restricționare, portabilitate și
-    opoziție, precum și dreptul de a-ți retrage consimțământul. TODO JURIDIC:
-    detaliază modalitatea de exercitare.
+    Pentru exercitarea drepturilor, trimite o solicitare la{" "}
+    <a href={site.emailHref}>{site.email}</a>. Răspundem în termenul prevăzut de
+    GDPR (de regulă, maximum 30 de zile).
+  </p>
+  <p>
+    Ai dreptul de a depune o plângere la{" "}
+    <strong>Autoritatea Națională de Supraveghere a Prelucrării Datelor cu
+    Caracter Personal (ANSPDCP)</strong>, dacă consideri că drepturile tale au
+    fost încălcate.
+  </p>
+
+  <h2>Securitatea datelor</h2>
+  <p>
+    Luăm măsuri tehnice și organizatorice rezonabile pentru protejarea datelor
+    împotriva accesului neautorizat, pierderii sau divulgării. Comunicarea prin
+    internet nu este însă complet sigură; îți recomandăm să nu transmiți prin
+    mesaje informații medicale detaliate decât dacă este necesar.
   </p>
 
   <h2>Cookie-uri</h2>
   <p>
-    Detalii despre cookie-uri găsești în
+    Detalii despre cookie-uri și tehnologii similare găsești în{" "}
     <a href="/politica-cookies/">Politica cookies</a>.
+  </p>
+
+  <h2>Modificări ale politicii</h2>
+  <p>
+    Putem actualiza această politică pentru a reflecta schimbări legislative sau
+    operaționale. Data ultimei actualizări este afișată în partea de sus a
+    paginii. Pentru modificări importante privind cookie-urile, este posibil să
+    îți solicităm din nou consimțământul.
   </p>
 
   <h2>Contact</h2>
   <p>
-    Pentru orice întrebare privind datele tale, scrie-ne la
-    <a href={site.emailHref}>{site.email}</a>.
+    Pentru orice întrebare privind datele tale personale, scrie-ne la{" "}
+    <a href={site.emailHref}>{site.email}</a> sau sună la {site.phoneDisplay}.
   </p>
 </LegalLayout>
