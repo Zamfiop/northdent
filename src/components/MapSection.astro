@@ -3,37 +3,42 @@ import { site } from "@/data/site";
 
 interface Props {
   class?: string;
+  /** Fără border/radius propriu — pentru integrare într-un card părinte */
+  embedded?: boolean;
 }
-const { class: className = "" } = Astro.props;
+
+const { class: className = "", embedded = false } = Astro.props;
+
+const query = `${site.address.streetAddress}, ${site.address.addressLocality}, Romania`;
+const embedSrc =
+  site.mapsEmbedUrl ||
+  `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
+
+const shellClass = embedded
+  ? `h-full min-h-[280px] ${className}`
+  : `overflow-hidden rounded-3xl border border-secondary-100 bg-white shadow-sm ${className}`;
 ---
 
-<div class={`overflow-hidden rounded-3xl border border-secondary-100 bg-white shadow-sm ${className}`}>
-  {
-    site.mapsEmbedUrl ? (
-      <iframe
-        src={site.mapsEmbedUrl}
-        title="Locația cabinetului North Dent pe Google Maps"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        class="aspect-[16/10] w-full border-0"
-        allowfullscreen
-      />
-    ) : (
-      // TODO: adaugă mapsEmbedUrl în src/data/site.ts pentru harta interactivă.
-      <a
-        href={site.mapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-track="maps_click"
-        class="flex aspect-[16/10] w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-primary-50 to-secondary-50 text-center"
-      >
-        <svg class="h-10 w-10 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-        </svg>
-        <span class="font-semibold text-secondary-800">Vezi locația pe Google Maps</span>
-        <span class="text-sm text-ink-soft">{site.address.streetAddress}, {site.address.addressLocality}</span>
-      </a>
-    )
-  }
+<div class={shellClass}>
+  <iframe
+    src={embedSrc}
+    title="Locația cabinetului North Dent pe Google Maps"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    class="h-full min-h-[280px] w-full border-0 md:min-h-[420px]"
+    allowfullscreen
+  />
+  <a
+    href={site.mapsUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-track="maps_click"
+    class="flex items-center justify-center gap-2 border-t border-secondary-100 bg-surface-muted px-4 py-3 text-sm font-semibold text-primary-700 transition-colors hover:bg-primary-50 hover:text-primary-800"
+  >
+    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+    </svg>
+    Deschide în Google Maps
+  </a>
 </div>

@@ -71,8 +71,8 @@ export const site = {
 
   // Hărți / Google Business Profile
   mapsUrl: "https://maps.app.goo.gl/xTokLoemcPu3EQgP7",
-  // TODO: adaugă embed URL real Google Maps (iframe) când e disponibil.
-  mapsEmbedUrl: "",
+  mapsEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1183.8241575966465!2d24.372782121401194!3d45.11368502903944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474d399f003893d9%3A0x7e33c5321ba588f5!2sNorth%20Dent%20-%20Cabinet%20Stomatologic!5e0!3m2!1sen!2sro!4v1782906401346!5m2!1sen!2sro",
 
   // Imagini — logo-uri locale în /public/images/logo/
   logo: {
@@ -80,6 +80,14 @@ export const site = {
     wideWhite: "/images/logo/logo-wide-white.svg",
     square: "/images/logo/logo-square.svg",
     squareWhite: "/images/logo/logo-square-white.svg",
+  },
+
+  // Open Graph — imagine la share (Facebook, WhatsApp, LinkedIn, X)
+  ogImage: {
+    src: "/images/og-default.webp",
+    width: 1200,
+    height: 630,
+    alt: "North Dent — cabinet stomatologic în Râmnicu Vâlcea",
   },
 
   // Rețele / profiluri (pentru sameAs). Google Maps profile e potrivit aici.

@@ -24,7 +24,7 @@ export interface ResolvedSeo {
   siteName: string;
 }
 
-const DEFAULT_OG_IMAGE = "/images/og-default.jpg"; // TODO: adaugă imagine OG reală
+const DEFAULT_OG_IMAGE = site.ogImage.src;
 
 /** Normalizează un path la forma absolută cu trailing slash. */
 export function absoluteUrl(path: string): string {

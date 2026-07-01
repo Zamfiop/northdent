@@ -3,7 +3,7 @@
 Adaugă aici imaginile reale ale site-ului. Fișiere așteptate (placeholder în cod):
 
 - `logo/` — logo-uri SVG: `logo-wide.svg`, `logo-wide-white.svg`, `logo-square.svg`, `logo-square-white.svg` (vezi `src/data/site.ts`)
-- `og-default.jpg` — imagine Open Graph implicită (1200×630), vezi `src/lib/seo.ts`
+- `og-default.webp` — imagine Open Graph la share (1200×630), vezi `site.ogImage`
 - `galerie/cabinet-stomatologic.webp` — poză cabinet (homepage Hero + galerie)
 - `galerie/cabinet-exterior.jpg`
 - `galerie/receptie.jpg`
