@@ -28,7 +28,7 @@ const locality = address.addressLocality;
 
 /** Text program actual — aliniat cu site.openingHours */
 const programText =
-  "Luni–joi suntem deschiși între 14:00 și 19:00. Vineri, sâmbătă și duminică cabinetul este închis.";
+  "Luni–vineri suntem deschiși între 09:00 și 20:00. Sâmbătă și duminică cabinetul este închis.";
 
 // FAQ scurt pentru homepage (5 întrebări) — vizibile și marcate cu schema.
 export const homepageFaqs: Faq[] = [
@@ -132,7 +132,7 @@ export const generalFaqCategories: FaqCategory[] = [
       {
         question: "Cabinetul este deschis vineri sau în weekend?",
         answer:
-          "Nu. Vineri, sâmbătă și duminică cabinetul este închis. Programările se fac de luni până joi, între 14:00 și 19:00.",
+          "Da, vineri avem același program: 09:00–20:00. Sâmbătă și duminică cabinetul este închis.",
       },
       {
         question: "Cum ajung la North Dent cu mașina sau cu transportul public?",

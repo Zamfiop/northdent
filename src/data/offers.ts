@@ -95,9 +95,9 @@ export interface Offer {
 export const offers: Offer[] = [
   {
     slug: "detartraj-periaj-airflow",
-    title: "Ofertă Detartraj + Periaj + Airflow — 300 lei | North Dent Râmnicu Vâlcea",
+    title: "Ofertă Detartraj + Periaj + Airflow — 199 lei | North Dent Râmnicu Vâlcea",
     description:
-      "Pachet complet de igienizare profesională (detartraj cu ultrasunete, periaj profesional și Airflow) la 300 lei în loc de 450 lei. Ofertă limitată la North Dent, Zona Nord, Râmnicu Vâlcea.",
+      "Pachet complet de igienizare profesională (detartraj cu ultrasunete, periaj profesional și Airflow) la 199 lei în loc de 250 lei. Ofertă limitată la North Dent, Zona Nord, Râmnicu Vâlcea.",
 
     eyebrow: "Zona Nord, Râmnicu Vâlcea",
     badge: "Ofertă limitată",
@@ -105,8 +105,8 @@ export const offers: Offer[] = [
     subheading:
       "Dinți vizibil mai curați într-o singură ședință, cu detartraj cu ultrasunete, periaj profesional și Airflow — la un preț special.",
 
-    priceNow: 300,
-    priceOld: 450,
+    priceNow: 199,
+    priceOld: 250,
     currency: "lei",
     priceNote: "pachet complet",
 
@@ -139,7 +139,7 @@ export const offers: Offer[] = [
     reviewAuthors: ["Ion's Vlog", "Maria Daiana Trifu", "Rosianu Silviu"],
 
     whatsappMessage:
-      "Bună ziua! Vreau să profit de oferta Detartraj + Periaj + Airflow la 300 lei. Când aveți loc?",
+      "Bună ziua! Vreau să profit de oferta Detartraj + Periaj + Airflow la 199 lei. Când aveți loc?",
 
     faqs: [
       {
@@ -164,9 +164,9 @@ export const offers: Offer[] = [
   },
   {
     slug: "albire-dentara",
-    title: "Ofertă Albire dentară — 600 lei | North Dent Râmnicu Vâlcea",
+    title: "Ofertă Albire dentară — 699 lei | North Dent Râmnicu Vâlcea",
     description:
-      "Albire dentară profesională la 600 lei în loc de 900 lei. Un zâmbet mai luminos, cu rezultat natural, sub supravegherea medicului. Ofertă limitată la North Dent, Zona Nord, Râmnicu Vâlcea.",
+      "Albire dentară profesională la 699 lei în loc de 1200 lei. Un zâmbet mai luminos, cu rezultat natural, sub supravegherea medicului. Ofertă limitată la North Dent, Zona Nord, Râmnicu Vâlcea.",
 
     eyebrow: "Zona Nord, Râmnicu Vâlcea",
     badge: "Ofertă limitată",
@@ -174,8 +174,8 @@ export const offers: Offer[] = [
     subheading:
       "Deschide nuanța dinților într-un mod controlat, sub supravegherea medicului, pentru un rezultat uniform și natural — la un preț special.",
 
-    priceNow: 600,
-    priceOld: 900,
+    priceNow: 699,
+    priceOld: 1200,
     currency: "lei",
     priceNote: "albire profesională în cabinet",
 
@@ -219,7 +219,7 @@ export const offers: Offer[] = [
     reviewAuthors: ["Maria Daiana Trifu", "Diana Dumitrescu", "Rosianu Silviu"],
 
     whatsappMessage:
-      "Bună ziua! Vreau să profit de oferta de Albire dentară la 600 lei. Când aveți loc?",
+      "Bună ziua! Vreau să profit de oferta de Albire dentară la 699 lei. Când aveți loc?",
 
     faqs: [
       {

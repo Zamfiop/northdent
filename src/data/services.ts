@@ -93,6 +93,10 @@ export const services: Service[] = [
       },
     ],
     related: ["igienizare-profesionala", "tratament-carii", "estetica-dentara"],
+    image: {
+      src: "/images/galerie/consultatie-stomatologica-valcea.webp",
+      alt: "Consultație stomatologică la North Dent, Râmnicu Vâlcea",
+    },
   },
   {
     slug: "igienizare-profesionala",
@@ -144,6 +148,10 @@ export const services: Service[] = [
       },
     ],
     related: ["detartraj", "airflow", "consultatie-stomatologica"],
+    image: {
+      src: "/images/galerie/igienizare-dentist-valcea.webp",
+      alt: "Igienizare profesională la North Dent, Râmnicu Vâlcea",
+    },
   },
   {
     slug: "detartraj",
@@ -195,6 +203,10 @@ export const services: Service[] = [
       },
     ],
     related: ["igienizare-profesionala", "airflow", "consultatie-stomatologica"],
+    image: {
+      src: "/images/galerie/igienizare-dentist-valcea.webp",
+      alt: "Detartraj la North Dent, Râmnicu Vâlcea",
+    },
   },
   {
     slug: "airflow",
@@ -297,6 +309,10 @@ export const services: Service[] = [
       },
     ],
     related: ["endodontie", "consultatie-stomatologica", "coroane-dentare"],
+    image: {
+      src: "/images/galerie/tratament-carii-valcea.webp",
+      alt: "Tratament carii la North Dent, Râmnicu Vâlcea",
+    },
   },
   {
     slug: "endodontie",
@@ -451,8 +467,8 @@ export const services: Service[] = [
     ],
     related: ["airflow", "estetica-dentara", "igienizare-profesionala"],
     image: {
-      src: "/images/galerie/albire-profesionala-valcea.webp",
-      alt: "Albire dentară profesională la North Dent, Râmnicu Vâlcea",
+      src: "/images/galerie/albire-dentara-valcea.webp",
+      alt: "Albire dentară la North Dent, Râmnicu Vâlcea",
     },
   },
   {
@@ -709,6 +725,10 @@ export const services: Service[] = [
       },
     ],
     related: ["consultatie-stomatologica", "tratament-carii", "igienizare-profesionala"],
+    image: {
+      src: "/images/galerie/dentist-copii-valcea.webp",
+      alt: "Stomatologie pentru copii la North Dent, Râmnicu Vâlcea",
+    },
   },
   {
     slug: "proteze-dentare",
@@ -811,6 +831,10 @@ export const services: Service[] = [
       },
     ],
     related: ["consultatie-stomatologica", "coroane-dentare", "estetica-dentara"],
+    image: {
+      src: "/images/galerie/gutiera-bruxism-valcea.webp",
+      alt: "Gutieră pentru bruxism la North Dent, Râmnicu Vâlcea",
+    },
   },
 ];
 

@@ -19,11 +19,11 @@ export interface OpeningHour {
 }
 
 export const openingHours: OpeningHour[] = [
-  { dayOfWeek: "Monday", label: "Luni", opens: "14:00", closes: "19:00" },
-  { dayOfWeek: "Tuesday", label: "Marți", opens: "14:00", closes: "19:00" },
-  { dayOfWeek: "Wednesday", label: "Miercuri", opens: "14:00", closes: "19:00" },
-  { dayOfWeek: "Thursday", label: "Joi", opens: "14:00", closes: "19:00" },
-  { dayOfWeek: "Friday", label: "Vineri", opens: null, closes: null },
+  { dayOfWeek: "Monday", label: "Luni", opens: "09:00", closes: "20:00" },
+  { dayOfWeek: "Tuesday", label: "Marți", opens: "09:00", closes: "20:00" },
+  { dayOfWeek: "Wednesday", label: "Miercuri", opens: "09:00", closes: "20:00" },
+  { dayOfWeek: "Thursday", label: "Joi", opens: "09:00", closes: "20:00" },
+  { dayOfWeek: "Friday", label: "Vineri", opens: "09:00", closes: "20:00" },
   { dayOfWeek: "Saturday", label: "Sâmbătă", opens: null, closes: null },
   { dayOfWeek: "Sunday", label: "Duminică", opens: null, closes: null },
 ];
