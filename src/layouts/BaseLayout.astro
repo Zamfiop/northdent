@@ -7,6 +7,7 @@ import Footer from "@/components/Footer.astro";
 import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
 import ConsentManager from "@/components/ConsentManager.astro";
 import JsonLd from "@/components/JsonLd.astro";
+import FaviconHead from "@/components/FaviconHead.astro";
 import type { SeoInput } from "@/lib/seo";
 import {
   dentistSchema,
@@ -36,10 +37,7 @@ const globalSchema = includeBusinessSchema
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    {/* TODO: generează un set complet de favicon (favicon.ico, apple-touch-icon.png)
-        și adaugă-l în /public/favicon/. Vezi și /public/images/ pentru og-default.jpg. */}
+    <FaviconHead />
     <meta name="theme-color" content="#069478" />
     <SeoHead {...seo} />
     {globalSchema.length > 0 && <JsonLd schema={globalSchema} />}
