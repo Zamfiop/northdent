@@ -8,6 +8,7 @@ import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
 import ConsentManager from "@/components/ConsentManager.astro";
 import JsonLd from "@/components/JsonLd.astro";
 import FaviconHead from "@/components/FaviconHead.astro";
+import ConsentBootstrap from "@/components/ConsentBootstrap.astro";
 import type { SeoInput } from "@/lib/seo";
 import {
   dentistSchema,
@@ -38,6 +39,7 @@ const globalSchema = includeBusinessSchema
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <FaviconHead />
+    <ConsentBootstrap />
     <meta name="theme-color" content="#069478" />
     <SeoHead {...seo} />
     {globalSchema.length > 0 && <JsonLd schema={globalSchema} />}

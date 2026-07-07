@@ -6,17 +6,18 @@
 //  - Meta Pixel și TikTok Pixel se încarcă DOAR după consimțământ pentru "marketing".
 //  - Nu setăm cookie-uri de tracking înainte de consimțământ.
 //  - Nu trimitem date medicale sensibile. Folosim doar evenimente generale.
+//
+// Consent Mode v2 (Google): ConsentBootstrap.astro setează default denied în <head>.
+// La acord, actualizăm storage-ul ÎNAINTE de gtag('config'), altfel collect nu pleacă în EEA.
 
 import { getConsent, CONSENT_EVENT, type ConsentState } from "@/lib/consent";
 
-// ID-urile vin din environment variables (placeholder-uri).
 const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
 const META_PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID as string | undefined;
 const TIKTOK_PIXEL_ID = import.meta.env.PUBLIC_TIKTOK_PIXEL_ID as
   | string
   | undefined;
 
-// Evenimente generale permise. NU includem nume de servicii ca date medicale.
 export type TrackingEvent =
   | "whatsapp_click"
   | "phone_click"
@@ -41,24 +42,65 @@ declare global {
   }
 }
 
-function injectScript(src: string, async = true): void {
-  const el = document.createElement("script");
-  el.src = src;
-  el.async = async;
-  document.head.appendChild(el);
+function gtag(...args: unknown[]): void {
+  window.dataLayer = window.dataLayer || [];
+  if (window.gtag) {
+    window.gtag(...args);
+    return;
+  }
+  // Fallback dacă bootstrap-ul lipsește (nu ar trebui).
+  window.dataLayer.push(args);
 }
 
-function loadGa(): void {
+function updateGoogleConsent(state: ConsentState): void {
+  gtag("consent", "update", {
+    analytics_storage: state.analytics ? "granted" : "denied",
+    ad_storage: state.marketing ? "granted" : "denied",
+    ad_user_data: state.marketing ? "granted" : "denied",
+    ad_personalization: state.marketing ? "granted" : "denied",
+  });
+}
+
+function injectScript(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>(
+      `script[src="${src}"]`,
+    );
+    if (existing) {
+      if (existing.dataset.loaded === "true") {
+        resolve();
+        return;
+      }
+      existing.addEventListener("load", () => resolve(), { once: true });
+      existing.addEventListener("error", () => reject(new Error(src)), {
+        once: true,
+      });
+      return;
+    }
+
+    const el = document.createElement("script");
+    el.src = src;
+    el.async = true;
+    el.addEventListener(
+      "load",
+      () => {
+        el.dataset.loaded = "true";
+        resolve();
+      },
+      { once: true },
+    );
+    el.addEventListener("error", () => reject(new Error(src)), { once: true });
+    document.head.appendChild(el);
+  });
+}
+
+async function loadGa(): Promise<void> {
   if (loaded.ga || !GA_ID) return;
   loaded.ga = true;
-  injectScript(`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer!.push(args);
-  };
-  window.gtag("js", new Date());
-  // anonymize_ip pentru un plus de confidențialitate.
-  window.gtag("config", GA_ID, { anonymize_ip: true });
+
+  await injectScript(`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`);
+  gtag("js", new Date());
+  gtag("config", GA_ID, { anonymize_ip: true });
 }
 
 function loadMetaPixel(): void {
@@ -79,9 +121,10 @@ function loadMetaPixel(): void {
     n.queue = [];
   })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
   /* eslint-enable */
-  injectScript("https://connect.facebook.net/en_US/fbevents.js");
-  window.fbq!("init", META_PIXEL_ID);
-  window.fbq!("track", "PageView");
+  void injectScript("https://connect.facebook.net/en_US/fbevents.js").then(() => {
+    window.fbq!("init", META_PIXEL_ID);
+    window.fbq!("track", "PageView");
+  });
 }
 
 function loadTikTokPixel(): void {
@@ -133,17 +176,15 @@ function loadTikTokPixel(): void {
   /* eslint-enable */
 }
 
-/** Aplică starea de consimțământ: încarcă ce e permis. */
+/** Aplică starea de consimțământ: actualizează Consent Mode și încarcă ce e permis. */
 export function applyConsent(state: ConsentState | null): void {
   if (!state) return;
-  if (state.analytics) loadGa();
+  updateGoogleConsent(state);
+  if (state.analytics) void loadGa();
   if (state.marketing) {
     loadMetaPixel();
     loadTikTokPixel();
   }
-  // TODO: la retragerea consimțământului, scripturile deja încărcate rămân
-  // active până la refresh. Ștergerea retroactivă a cookie-urilor complexe
-  // va fi implementată într-o fază ulterioară.
 }
 
 /** Trimite un eveniment general (fără date medicale sensibile). */
@@ -153,10 +194,8 @@ export function trackEvent(
 ): void {
   const consent = getConsent();
   if (!consent) return;
-  // Context permis: doar valori generale, ex. { category: "service" }.
   if (consent.analytics && window.gtag) {
-    // beacon: evenimentul ajunge la GA chiar dacă utilizatorul pleacă imediat (ex. WhatsApp).
-    window.gtag("event", event, { ...params, transport_type: "beacon" });
+    gtag("event", event, { ...params, transport_type: "beacon" });
   }
   if (consent.marketing && window.fbq) {
     window.fbq("trackCustom", event, params);
@@ -173,8 +212,6 @@ export function initTracking(): void {
     applyConsent((e as CustomEvent<ConsentState>).detail);
   });
 
-  // Delegare de evenimente pentru CTA-uri. Elementele marcate cu data-track
-  // trimit evenimentul general corespunzător.
   document.addEventListener("click", (e) => {
     const target = (e.target as HTMLElement)?.closest<HTMLElement>("[data-track]");
     if (!target) return;

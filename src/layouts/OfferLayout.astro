@@ -11,6 +11,7 @@ import { site } from "@/data/site";
 import { legalNav } from "@/data/navigation";
 import type { SeoInput } from "@/lib/seo";
 import FaviconHead from "@/components/FaviconHead.astro";
+import ConsentBootstrap from "@/components/ConsentBootstrap.astro";
 
 interface Props extends Omit<SeoInput, "noindex"> {}
 const seo = Astro.props;
@@ -23,6 +24,7 @@ const year = new Date().getFullYear();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <FaviconHead />
+    <ConsentBootstrap />
     <meta name="theme-color" content="#069478" />
     <SeoHead {...seo} noindex={true} />
   </head>
