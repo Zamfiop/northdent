@@ -155,7 +155,8 @@ export function trackEvent(
   if (!consent) return;
   // Context permis: doar valori generale, ex. { category: "service" }.
   if (consent.analytics && window.gtag) {
-    window.gtag("event", event, params);
+    // beacon: evenimentul ajunge la GA chiar dacă utilizatorul pleacă imediat (ex. WhatsApp).
+    window.gtag("event", event, { ...params, transport_type: "beacon" });
   }
   if (consent.marketing && window.fbq) {
     window.fbq("trackCustom", event, params);
